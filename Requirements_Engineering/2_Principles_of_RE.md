@@ -131,3 +131,27 @@
 
 
 # Validation
+1. Goal
+    - Stakeholder's desires and needs -> Requirement specification -> Deployed system
+    - Ultimate question: Does the deployed system reflect the stakeholder's desire?
+        * Usually assessed late
+    - Risk reduction question: Do the **documented** requirements match the stakeholder's desires and needs
+    - Requirements quality question: Are the documented requirements of good quality (comprehensible, unambiguous)
+    - Conflict question: Is there a consensus among the stakeholders?
+    - If you make the effort to do engineer a requirement, you should validate it
+
+
+
+# Evolution
+1. Challenge: keep requirements stable, while allowing them to change
+1. Solutions:
+    - Short development cycles (1-6 weeks)
+    - Explicit requirements management
+1. Embrace opportunities for change (usually means you understand something better)
+
+
+
+# Innovation
+1. What?
+    - Satisfying the stakeholders isn't enough
+    - Need to strive for more, look for future opportunities
