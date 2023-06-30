@@ -96,4 +96,74 @@
 
 
 # Traditional Auction Mechanisms
+1. Vickrey Auction
+    - Second price sealed bid auction
+    - (weakly) dominant strategy = truth telling (bid = signal)
+    - Intuition: a bid influences the probability of winning, but not the price
+    - Good in theory, but irrelevant in practice (Fear of a cheating auctioneer)
+1. First-price sealed bid auction (FPSB)
+    - Same as above, but pay = bid
+    - Bidder only has to decide on their bid
+    - Revenue
+        * Valuations drawn from uniform distribution [0, 1]
+        * Unique Nash Equilibrium: bid = (1 - 1/n)*valuation
+            + n = number of bidders
+        * SER
+            + (n - 1) / (n + 1)
+1. Dutch auction
+    - Price decreases, first bid wins
+    - Bidder decides on how long to wait
+1. FPSB & Dutch auction
+    - Strategically equivalent
+    - Don't reveal information about the other bidders
+    - Find a lowest bid which maximizes the chance of winning
+1. SER is the same for all of the above + English
 
+
+
+# Revenue Equivalence Theorem
+1. Based on the assumptions of the Benchmark Model
+1. Remarks
+    - Even though all four auctions yield the same price on average, the outcomes are not always exactly the same
+    - Finding the dominant strategy in an English/Vickrey auction is easy
+    - Finding the Nash equilibrium in a first-price or a Dutch auction is a nontrivial computational problem
+1. Reserve prices
+    - Assumption: seller has value for the item >= 0
+    - Maximizing expected revenue then means:
+        * if expected price < seller's value - refuse to sell
+        * else - sell to bidder with highest valuation
+    - If a reserve price is set -> possibility of inefficient outcomes
+1. Relaxing A1 (bidders not necessarily risk neutral)
+    - Seller is still risk neutral
+    - English auction
+        * same as with risk neutral bidders
+    - FPSB
+        * if agent loses - they get nothing
+        * else - they have a positive profit
+        * marginally increasing the bid lowers the profit, but increases the chance of winning
+            + => SER increases with the bid
+    - Remarks
+        * FPSB not optimal
+        * Risk averse bidders need an incentive to bid higher (they are afraid of paying too much)
+        * => seller should:
+            + subsidize high bidders who lose
+            + penalize low bidders
+1. Relaxing A2 (common or correlated/affiliated values)
+    - Each bidder estimates the true value of the item
+    - Bidder with highest estimate wins
+        * Winner's Curse: overestimating ???
+    - Sophisticated bidders take that into account and bid more cautiously
+    - Remark:
+        * Iterative (non-direct) mechanisms can aggregate the dispersed information
+            + Example: Bids in English auctions reveal part of private information
+1. Relaxing A3 (asymmetric bidders)
+    - Bidders belong to recognizably different classes with different distributions of their valuations
+    - English auction
+        * Same as with symmetric bidders
+    - FPSB
+        * Bidders of different classes face different degree of competition
+        * Yields different (possibly inefficient) outcome
+1. Theoretical predictions (TODO: image)
+1. Practical experiments
+    - contradicting results
+    - not yet proved empirically
