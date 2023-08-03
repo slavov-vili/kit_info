@@ -32,7 +32,12 @@ XAI = Explainable Artificial Intelligence
     - Why is XAI important?
 
 1. Exam
-    - 26.09
+    - Final QnA:
+        * 19.09, 10-11:30
+        * -101
+    - Exam
+        * 26.09, 09:30-11
+        * 
 
 
 
