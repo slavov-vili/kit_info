@@ -30,6 +30,7 @@
 
 
 # General idea
+1. ![image](graphs_overfitting_underfitting.png)
 1. Goal: Good generalization (performance on data points not seen during training)
 1. Challenge: optimizing a model on a finite set of training data to perform on new data points (validation/test set)
 
@@ -54,15 +55,20 @@
     - Classical regularization
     - Large weights are a sign of overfitting
     - Shrinks weights during backpropagation by adding a penalty to the cost function
+    - The model has to balance between fitting the data and complexity (small weights = less complex?)
     - Optimizes an Objective function (loss function + regularization factor (punishment for large weights))
     - L1 regularization (Lasso)
         * Drives some weights to 0 => Leads to sparse representations
         * Can be used as a feature selector (sparsity eliminates irrelevant or redundant features)
         * Penalty is proportional to the sum of absolute values of the weights
-    - L2 regularization (Ridge Regression)
-        * Doesn't force the weights to be exactly 0
+            + L1 Loss = Original Loss + lambda * sum(|x_i|)
+            + lambda controls the strength of the regularization
+    - L2 regularization (Ridge)
+        * Forces the weights to be small, but not exactly 0
         * More continuous shrinkage effect
         * Penalty is proportional to the sum of squares of the weights
+            + L2 Loss = Original Loss + lambda * sum(x_i ^ 2)
+    - ![image](graphs_overfitting_underfitting.png)
 
 1. Early Stopping
     - Use Validation set to stop training before generalization error increases
@@ -82,7 +88,7 @@
             + **but** follows the same probability distribution
 
 1. (n-fold) Cross validation
-    - TODO: add image splits x folds
+    - ![image](cross_validation.png)
     - Split training data in subsets of roughly equal size (folds)
     - Training and evaluation
         * Choose a different fold for validation each iteration
@@ -109,9 +115,9 @@
 
 1. Dropout
     - Regularization technique
-    - Disable a random fraction (p) of nodes in each iteration
+    - Training: Disable a random fraction (p) of nodes in each iteration
     - Tries to prevent the network from relying on specific neurons or their combinations
-    - Have to scale weights of un-dropped by factor p when testing (because now more neurons are active)
+    - Testing: Have to scale weights of un-dropped by factor p (because now more neurons are active)
     - Effective against overfitting
         * Suspected reason: breaks up situations where layers co-adapt to correct mistakes of previous ones
         * Side-effect: activations of hidden units are sparse
@@ -121,8 +127,7 @@
     - Enables:
         * Higher learning rates (faster training)
         * Less sensitive to weight initialization
-    - Problem:
-        * Internal Covariate Shift (ICS)
+    - Problem: Internal Covariate Shift (ICS)
         * Weights and biases are updated during backpropagation
         * Input distribution at intermediate layers shifts
             + Input distribution = statistical properties of the input (e.x. some features become more prominent)

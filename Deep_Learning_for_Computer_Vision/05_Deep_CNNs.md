@@ -5,6 +5,7 @@
     - 16-19 weight values
     - small, simple filters: reduces number of weights
     - small receptive fields: 3x3
+    - Receptive field = area of the image to which a given neuron is sensitive to
 
 
 
@@ -12,7 +13,7 @@
 1. Deep Convolutional Activation Feature for Generic Visual Recognition (DeCAF)
     - Goal: describe the image, not just classification
     - Deep networks automatically learn good features
-    - Hierarchy of filters: simple edges, parts of objects, objects
+    - Hierarchy of filters: simple edges -> parts of objects -> objects
     - Last layer is typically the softmax
     - Train network end-to-end on classification
     - Use pre-trained network
@@ -22,10 +23,8 @@
 
 1. DeepFace
     - Deep networks as face feature extractors
-        * 3D aligned face image
-        * C1: 32 filters, 11x11x3 (3 = RGB layers)
-        * M2: 3x3, stride 2 (max pooling)
-        * C3: 16 filters, 9x9x32
+        * ![image](DeepFace.png)
+        * Input = 3D aligned face image
         * L4,L5,L6: 4096 dim representation (locally connected filters)
         * F7,F8: feature representation (fully-connected)
         * No more max pooling, since the images are only faces and already aligned
@@ -35,29 +34,40 @@
 
 # Further CNN Networks
 1. GoogleNet
+    - ![image](GoogleNet.png)
+        * Stem Network
+        * Stacked Inception Modules
+        * 2x Auxiliary Loss layers
+        * Output = Average pooling + 1 linear layer
     - FC = fully connected
-    - Inception module = network within network
+    - Features:
+        * 22 layers
+        * No FC layers
+        * Inception module = network within network
+        * Only 5M parameters (12x less than AlexNet!)
     - Stack inception modules
-
     - Naive inception module:
         * Apply multiple convolutions (filters) in parallel
             + multiple receptive fields: 1x1, 3x3, 5x5
-        * Use pooling to concatenate the outputs depth-wise
-        * TODO: image
+        * Concatenate the outputs with pooling depth-wise
+        * ![image](naive_inception_module.png)
         * Problem: lots of channels and computation ops
             + pooling preserves depth
     - Solution: Bottleneck layers
-        * 1x1 convolution layers with smaller depth
-            + each filter calculates a depth-dimensional dot product
-        * preserves spatial dimensions, but reduces depth
-    - TODO: full architecture image
-    - TODO: explain classifier
+        * Reduce the depth of the previous layer's output
+            + 1x1 convolution layers with smaller depth
+    - Classifier architecture
+        * Average pooling + 1 linear layer instead of FC layers
         * Global Average Pooling
-            + average last feature maps to 1x1
-            + 1 linear layer and softmax for classification
+            + Calculate average value for each feature map and store as vector
+            + Use softmax on that
             + less parameters & better performance than FC
-        * Auxiliary Loss Layers
-            + calculate additional loss at given place in network and propagate back to previous layers
+    - Auxiliary Loss Layers
+        * Tries to fix the vanishing gradient problem
+            + During backpropagation, the gradients might get too small and not be useful for changing the weights
+        * The auxiliary layers are basically small classifiers
+            + They predict a label based on the previous layers
+            + Their loss and gradient are propagated backwards
 
 
 
@@ -65,12 +75,15 @@
     - Depth Revolution
         * Deep networks with residual connections
     - Why?
-        * Deep Networks perform better up until a certain point (TODO: image)
+        * Deep Networks perform better up until a certain point
             + At some point no longer due to overfitting
         * Solution
             + Residual block passes input identity around convolutional layers
             + Then add output + identity element-wise
-            + TODO: image
+            + ![image](residual_block.png)
+        * Idea:
+            + Instead of learning the whole transformation (input -> output)
+            + Learn small changes between current state and expected value
     - Full architecture
         * Stack residual blocks
         * Each has two 3x3 layers
@@ -82,13 +95,17 @@
         * Identity Mappings in Deep Residual Networks
             + Improves block design, more direct path for propagating information
         * Wide Residual Networks
+            + ![image](wide_resnet_block.png)
             + More shallow network, but wider
+            + Argues that residuals are more important than depth
             + Outperforms the original, more performant (parallelization)
         * ResNeXt
+            + ![image](resnext_block.png)
             + Increases width through multiple parallel pathways
-            + Similar in spirit to the Inception module
+            + Similar to the Inception module
     - DenseNet
-        * Densely connected layers
+        * ![image](densenet_block.png)
+        * Densely connected layers (every layer connected to every other one)
         * Alleviates vanishing gradient
         * Strenghtens feature propagation
         * Encourages feature reuse
@@ -103,4 +120,13 @@
     - Splits depthwise and pointwise convolution
         * depthwise = convolve for each channel with wider, but shallow filter: depth x depth x 1
         * pointwise = convolve with a narrow, but deep filter 1x1xdepth
-        * Convolute for each channel, then concatenate (1x1 convolution on all channels)
+        * Convolve for each channel, then concatenate (1x1 convolution on all channels)
+    - ![image](MobileNet.png)
+    - Math
+        * Example:
+            + Input = 12x12x3
+            + Output = 8x8x256
+        * Usually: 256 5x5x3 kernels = 256x5x5x3x8x8 = 1.228M multiplications
+        * Depthwise: 3 5x5x1 kernels = 3x5x5x1x8x8 = 4800
+        * Pointwise: 256 1x1x3 kernels = 256x1x1x3x8x8 = 49K
+        * Total: ~54K multiplications
