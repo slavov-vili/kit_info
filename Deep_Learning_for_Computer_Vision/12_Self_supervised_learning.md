@@ -11,8 +11,9 @@
 
 
 # Possible proxy objectives
-1. Reconstruction 
+1. Reconstruction
     - Autoencoders (encoder/decoder structure)
+        * ![image](autoencoders.png)
         * Goal: reconstruct the input image
         * Loss = error between input and output
         * The network is forced to learn a compact representation of the image
@@ -23,17 +24,21 @@
             + Difficult for large images with small details
             + Proxy losses often cannot model the real objective (lead to trivial outputs)
     - Colorization
+        * ![image](colorization.png)
         * Similar, but input != label
-        * Input = grayscale of an image
+        * Input = grayscale version of an image
         * Target = original colored version
         * The network has to learn a meaningful representation to fill in the colors
 1. Context and Positioning
+    - ![image](context_position_learning.png)
     - Take segments of the image and train the network to know how they best fit together
     - General: think of a task which teaches the network the structure of the image without needing explicit labels
     - Task setup: take 2 cropped parts of an image and try to see how the second one fits in (formulated as classification problem)
     - Important to avoid trivial solutions through context abuse
         * Example: connect lines and continue patterns
-        * Prevented by inserting gaps or making sure no 2 gaps are next to each other
+        * Prevented by inserting gaps or making sure no 2 crops are next to each other
+    - Other Ideas:
+        * Give a bunch of rotations of an image, guess the correct one
 1. Temporal order of video frames
     - What is a video?
         * Temporal sequence of frames

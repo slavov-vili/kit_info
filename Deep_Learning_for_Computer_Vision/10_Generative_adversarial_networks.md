@@ -11,6 +11,7 @@
             + The network computes a differentiable function which maps the vector to an instance in data space (a similar image)
             + Training data: samples which originate from the true data distribution
             + Loss function: how likely is the output to the true data distribution
+        * ![image](implicit_generative_model.png)
         * Advantage
             + we have a criterion for evaluating the quality of the output => gradient can be computed
             + this allows for network parameters to be updated to generate better samples
@@ -23,16 +24,19 @@
     - The generator network tries to produce realistic-looking samples
     - The discriminator network tries to distinguish between images from the training data and the generator network
     - Aka: the generator tries to fool the discriminator
+    - ![image](gan_basics.png)
 1. Training
     - Train jointly in minmax game
     - Discriminator tries to maximize its objective (real = 1, from generator = 0)
     - Generator tries to minimize its objective (output to discriminator leads to 1)
     - Alternating between gradient ascent and descent
+    - ![image](gan_training.png)
     - Notes
         * In practice, optimizing the generator does not work well
         * The gradient signal is dominated by good samples => cannot improve bad samples
-        * Better solution:
+        * **Better solution**:
             + Generator goal = maximize likelihood of discriminator being wrong
+            + Gradient ascent on generator too
             + Same objective of fooling, but with higher gradient signal for bad samples => works better
 1. Evaluating GANs
     - If used for some downstream task - use the metrics in the task (e.g. classification accuracy)

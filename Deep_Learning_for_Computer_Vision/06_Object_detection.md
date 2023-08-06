@@ -1,22 +1,24 @@
 # Tasks
-1. Classification (What?)
-1. Localization (Where?)
-1. Detection (what and where?)
-1. Segmentation (what and where exactly?)
+1. Classification (What is this?)
+1. Localization (Where is this?)
+1. Detection (what things do I see and where are they?)
+1. Segmentation (what things and where exactly? (outline))
 
 
 
 # Object detection
-1. What?
+1. What is it?
     - Localize objects using bounding boxes (bbox)
     - Classify each bbox to its object class
-1. Regression Problem?
+1. As a Regression Problem?
+    - ![image](object_detection_as_regression.png)
     - Regression model = statistical model which looks at the relationship between a dependent and independent variables
     - Idea: use regression model to detect objects
     - Model output = coordinates of objects in the image (x, y, width, height)
-    - Problem: need variable sized outputs
-1. Classification Problem?
+    - Problem: need variable sized outputs (images contain different number of cats)
+1. As a Classification Problem?
     - Sliding Window Approach
+        * ![image](sliding_window_scaled.png)
         * Only check small parts of the image
         * Classify each patch
         * How do you classify objects of different sizes?
@@ -42,11 +44,11 @@
     - Fast dense generic detection + Slow sparse classification
         * Use more complex object classifier on region proposals
 1. R-CNN
+    * ![image](rcnn.png)
     * Only feed the proposed regions to the classifier
     * Training
         + Train AlexNet on ImageNet (1000 classes)
-        + Reinitialize last layers to the dimension of the number of classes in the new classifier
-        + image -> conv and pool -> final conv feature map -> FC layers -> reinitialized layer -> Softmax loss
+        + ![image](rcnn_training_alexnet.png)
         + Train the classifier (binary SVMs for each class, features = output of pool5 of AlexNet)
         + Improve region proposals (use regression model with input = features and output = locations of regions)
     * Correct classification of a bbox = if at least 50% overlap with ground truth
@@ -55,12 +57,14 @@
         + Recall (R) = # relevant retrieved / # relevant in data
         + F/F1 measure = 2 * P * R / (P + R)
     * Fast R-CNN
+        + ![image](fast_rcnn.png)
         + Idea: share computation on entire image
         + Region Proposals: on entire image instead of each class
         + Feature Extraction: give whole image to CNN for feature extraction
         + Region of Interest (ROI) Pooling: turn irregularly shaped proposals to a fixed size (to feed into FC network)
         + Classification and Regression: 2x FC layers (1x classification, 1x bbox regression)
     * Faster R-CNN
+        + ![image](faster_rcnn.png)
         + Tries to integrate the region proposal generation into the network
         + Convolutional Backbone: process input image with a CNN (extracts rich feature maps)
         + Region Proposal Network (RPN): small network which slides a small window and generates candidate regions (evaluates windows of different sizes for objectness)
@@ -79,6 +83,7 @@
     - How to speed it up?
         * Try to avoid resampling
 1. Idea
+    - ![image](single_shot_multibox_detector.png)
     - Use a set of fixed default boxes at each position in a feature map
     - Classify objects and box regression for each box
     - Apply boxes at different layers in the ConvNet (use layers of different sizes => avoids rescaling)

@@ -9,6 +9,7 @@
     - Action Recognition
 
 # Recurrent Neural Networks (RNNs)
+![image](rnn_architectures.png)
 1. What?
     - Input = sequence
     - Update state representation

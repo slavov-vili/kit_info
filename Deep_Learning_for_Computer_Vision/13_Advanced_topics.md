@@ -9,6 +9,7 @@
 
 
 # Uncertainty
+![image](uncertainty.png)
 1. Types of uncertainty
     - Aleatoric (data uncertainty)
         * from Latin: dice player's
@@ -25,16 +26,3 @@
         * Sample T times with Bernoulli distribution and average
     - Confidence Calibration (TODO: explain)
     - Ensemble (TODO: explain)
-
-
-
-# Beyond the training data
-1. Zero-Shot Learning (TODO: explain)
-
-
-
-# Working with less
-
-
-
-# Transfer
