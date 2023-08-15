@@ -2,11 +2,13 @@
 1. Terminology
     - Game Theory: understanding how agents act in scenarios where they need to make decisions
     - Mechanism Design: Finding a mechanism which lets / makes agents act in a certain way and achieves a desired goal
-    - Auctions: Tools for which implement mechanisms
+    - Auctions: Tools which implement mechanisms
     - Judgement of Solomon
         * 2 women argue about a baby. He tells them to cut it in half
-        * Solomon's mechanism (TODO: image)
-1. Why?
+        * Solomon's mechanism
+        * ![image](images/solomons_mechanism.png)
+1. Why Mechanism Design?
+![image](images/framework_mechanism_design.png)
     - Obtain some outcome (function of agent preferences)
     - Agents may lie
     - Define rules which achieve the goal in case of an equilibrium
@@ -33,21 +35,13 @@
         * a decentralized optimization problem with self-interested agents with private
         * information about their preferences for different outcomes."
             + Fully rational self-interested agents
-            + Each agents holds an input to an optimization problem
+            + Each agent holds an input to an optimization problem
             + System-wide goal: solve the optimization problem
             + Approach: provide incentives to promote truth-revelation
 1. Fundamentals (formalization)
 1. Social Choice and Mechanisms
-    - Social Choice Function
-        * The outcome that we want to achieve
-        * Dependent on the types of agents
-    - Mechanism
-        * Available strategies in the game
-        * Available outcomes (dependent on the strategies
-        * In an auction: bidding language, winner determination rule, payment rule)
-    - Mechanism Implementation
-        * The mechanism's outcome should achieve the social choice function
-1. Equilibria
+![image](images/social_choice_and_mechanisms.png)
+1. Solution Concepts
     - Nash Equilibrium (NE): common knowledge assumption, rationality, multiple equilibria
     - Bayes-Nash Equilibrium (BNE): information asymmetry (common prior), rationality, multiple equilibria
     - Dominant Strategy Equilibrium (DS): no assumptions on available info or rationality
@@ -121,6 +115,7 @@
 
 
 # Strategy Proofness
+![image](images/strategy_proofness.png)
 1. How to prevent agents from lying?
     - Need a mechanism where truth telling is equilibrium (dominant strategy at best)
 1. Types of revelation
@@ -137,7 +132,7 @@
 1. Uniqueness
     - VCG mechanisms are the only allocation-efficient and strategy-proof ones
     - for agents with quasi-linear preferences and general valuation functions
-    - amongst all direct-revelation mechanisms
+    - among all direct-revelation mechanisms
 1. Revelation Principle
     - Any mechanism which achieves allocation efficiency in dominant-strategy implementation must implement VCG outcome
 1. Incentive-Compatibility

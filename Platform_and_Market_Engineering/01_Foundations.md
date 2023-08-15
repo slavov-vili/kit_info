@@ -1,5 +1,6 @@
 # Short History of Economics
 1. Definitions
+    - **Market = Supply & Demand**
     - Neo-classical Theory
         * The economic problem of society is how to allocate given resources
     - Market
@@ -8,7 +9,6 @@
         * Market price evolves through interaction between supply and demand
     - Main contribution of neo-classical theory:
         * The market will take care of resource allocation if permitted to do so
-
 1. Neo-classical Theory assumes Perfect Markets
     - Utility maximization of consumers
     - Profit maximization of suppliers
@@ -17,7 +17,6 @@
     - Perfect transparency of markets
     - No transaction costs
     - Immediate response of market participants
-
 1. Hayek's Critique
     - The economic problem is instead of optimization of knowledge not given to anyone in its totality.
     - Markets communicate private knowledge efficiently
@@ -27,48 +26,43 @@
 
 # Origin and Function of Institutions
 1. Institutions
+    - **Market = Supply & Demand + Institutions**
     - Humanly devised constraints which structure political, economic and social interaction
     - Consist of informal constraints, formal rules and the enforcement characteristics of both
     - Give order to social life
         * Order = the elements of a system remain in a recognizable and predictable interrelationship
-        * Order reduces transaction costs
-    - Prescribe a behavior
     - Example: Standard Form for Contract
-
-    - TODO: add image
-
-    - Formal Institutions 
+        * Order reduces transaction costs
+        * Institutions prescribe a behavior
+    - No need for costly information and enforcement activities
+    - ![image](images/institutions_and_design_example.png)
+    - Formal Institutions
         * Written rules
         * Form the basis for enforcement
-        * Violations are enforced by authority according to plannen sanctions
+        * Violations are enforced by authority according to planned sanctions
         * Authority is **not** limited to the government
-
     - Informal Institutions
         * Usually not written (at most partially)
         * Enforcement not specified in advance
-        * Spontaneous societal feedback *punishes* the violators
-    
+        * Spontaneous societal feedback **punishes** the violators
     - Conscious Design
         * Constructivist Epistemology (from Descartes)
-            + all worthwhile social institutions were and should be created by conscious deductive processes of human reason
+            + all social institutions should be created by conscious deductive processes of human reason
         * Society has a function independent of the individual agents
         * This social goal is achieved when the individuals are coordinated
-
     - Spontaneous Order (Hayek's Catallaxy)
-        * Insitutions are formed as a result of a cultural-evolutionary process based on which institution can best solve the coordination problem
-        * Only spontaneity can recognize and embody the dynamic flux in the environments and the inadequacy of the agents' knowledge
+        * The Institution which can best solve the coordination problem is formed (cultural-evolutionary)
+        * Only spontaneity can solve the dynamic environment and inadequacy of agents' knowledge
 
 
 
 # Market Engineering
 1. Definition
-    - Comprises the
-        * structured, systematic and theoretically founded procedure
-        * of analyzing, designing, introducing and quality assuring
-        * of (electronic) market platforms as well as their legal framework
+    - The procedure of analyzing, designing and introducing (electronic) market platforms and their legal frameworks
+        * structured, systematic and theoretically founded
     - simultaneously regarding their
         * market mechanisms and trading rules,
         * systems, platforms, media rules,
         * business models and rules
-
-1. Framework of Market Engineering (TODO: image)
+1. Framework of Market Engineering
+![image](images/framework_of_market_engineering.png)

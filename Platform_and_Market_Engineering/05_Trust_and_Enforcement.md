@@ -51,7 +51,8 @@
         * Technical implementation of trust in electronic systems
             + Examples: Cryptography, SSH, Authentication, etc.
             + Challenges: Bugs, Hacking, etc.
-        * In e-commerce & P2P: necessary to define and implement a computational notion of trust
+        * In e-commerce & P2P
+            + Necessary to define and implement a computational notion of trust
             + Examples: point-based-reputation systems (eBay, Amazon, Airbnb, etc.)
             + Challenges: Rating mechanism, Cheating, etc.
         * Aspects
@@ -90,9 +91,10 @@
     - Internet transaction fraud is 12 times more likely than in-store fraud
     - Reputation mechanisms build trust and elicit cooperation between loosely connected and geographically dispersed agents
 1. Fundamental Trust Problem
-    - Buyer's Choice (TODO: image)
+    - ![image](images/fundamental_trust_problem.png)
+    - Buyer's Choice
         * Sellers have no initial pecuniary incentive to ship the item
-        * Only perfect equilibrium is not buying
+        * Only subgame-perfect equilibrium is not buying
     - Without enforcement mechanisms, the game results in no trades
 1. Experimental Treatments
     - Partners Market: Some buyer-seller pairs interact repeatedly (traditional offline relationship)
@@ -118,8 +120,8 @@
         * Feedback extortion (demanding actions while threatening negative feedback)
         * Feedback solicitation (trading feedback)
 1. Adversaries
-    - Do fraudulent actions
     - Agents who try to harm others or the system or act in an unacceptable way
+    - Do fraudulent actions
     - Two types: selfish and malicious
     - Different mechanisms are needed for different types of adversaries
         * incentives help with selfish ones, but not effective against malicious ones
@@ -131,6 +133,7 @@
     - Enforcement is costly and mechanism design is not trivial
     - We need an enforcement mechanism, which encourages rating and is not attractive to adversaries
 1. Example solution: Entry Fees
+    - ![image](images/entry_fees_game.png)
     - Sellers need to pay fee before being able to trade
     - If they don't deliver - kick them out and keep fee
     - Else: they can leave and get their deposit back

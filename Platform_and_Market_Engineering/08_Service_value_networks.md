@@ -1,12 +1,12 @@
 # Service Value Networks (SVNs)
 1. Service mashups
+    - ![image](images/service_mashup_example.png)
     - Combine existing services
     - Reduce transaction cost for users
     - Allow Combinatorial Innovation = Rapid and flexible development of new complex services
     - Rely on the APIs of the subservices
-    - Example: BlaBlaCar
-        * Search, Booking, Mapping, Rating
-    - Service Value Network for Data Management (TODO: image)
+    - SVN for Data Management
+        * ![image](images/svn_for_data_management.png)
 1. Definition
     - Smart business networks which provide automated on-demand composition of complex services from a steady, but open pool
     - Automation
@@ -33,7 +33,8 @@
     - Agile and market-based composition
         * ad hoc and demand-driven orchestration of complex services
         * market-based approaches => efficient solution
-1. Requirements in SVN (TODO: image)
+1. Requirements in SVN
+    - ![image](images/service_value_network_requirements.png)
 
 
 
