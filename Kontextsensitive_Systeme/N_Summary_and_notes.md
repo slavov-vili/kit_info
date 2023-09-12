@@ -6,7 +6,7 @@
     - Egal, nur nicht switchen
     - Begriff können auch auf Englisch
 1. Übung
-    - Davon schicken und erklären können
+    - Davor schicken und erklären können
 
 
 
