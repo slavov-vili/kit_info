@@ -58,8 +58,14 @@
         * Uses sum of abs values instead of sum of squares
         * Optimal values shift towards 0 and end up at 0
     - Pros
-        * 
+        * Easy to understand
+        * Widely applied => well understood
+        * Easy to asses how individual features contribute
+        * Guarantees the optimal solution
     - Cons
+        * Can only model linear relationships (between features and output)
+        * Limited predictive performance
+        * Weights can be unintuitive (can be negative in order to cancel a co-relating)
 1. Generalized Linear Models (GLM)
     - Representation of stuff as GLMs
     - Allows the modelling of non-normal distributions
@@ -74,7 +80,11 @@
     - Interpretation
         * Of weights depends heavily on the link function
     - Pros
+        * No longer restricted by normality assumption
+        * Can train on non-linear data, while retaining linear relationship between data and weights
     - Cons
+        * Link function complicates interpretability of weights and features
+        * Still restricted to linear relationships
 1. Logistic Regression
     - Allows to use linear models for classification
     - Uses the sigmoid function (logistic function) to transform the prediction into a probability value
@@ -85,8 +95,18 @@
     - Interpretation
         * Not as simple: odds of sth happening
         * 
+    - Pros
+        * Widely applied => well understood
+        * Weights somewhat interpretable
+        * Provides probabilities for the classification
+    - Cons
+        * No automatic feature interaction
+        * Theoretically infinite weight for a feature which perfectly separates the data
+            + Makes fitting impossible
+            + Paradox: a single great feature makes it unusable
     - Perceptrons
-        * 
+        * Basically what we just defined
+        * Usually another activation is used (ReLU)
 
 
 
@@ -104,3 +124,10 @@
         *
     - For each feature: keep others fixed and fit
     - Can look at separate feature contributions to outcome
+    - Pros
+        * Model complex relationships
+        * Smooth functions can capture non-linear, non-monotonic and interactive effects
+        * Provide valuable insight into the direction of feature effects
+    - Cons
+        * Interpretation can be challenging because of smooth functions
+        * Selecting suitable smooth function can be challenging
