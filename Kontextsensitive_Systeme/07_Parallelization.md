@@ -3,7 +3,7 @@
     - Optimization algorithms are often sequential
     - Complex functions & feature spaces require iterative training control
     - Most algorithms keep a lot of state
-    - The state variables are strongly depended, so they need to be synchronized
+    - The state variables are strongly dependent so they need to be synchronized
 1. Lambda Architectures (Function composition)
     - ![image](images/lambda_architectures.png)
     - Combines batch and real-time data processing
@@ -62,7 +62,7 @@
 # Parallelizing classification
 1. Challenges
     - Problem while learning: Many models work on a single in-memory model (R/W dependencies hinder parallelization)
-    - Classification is usually high-dimensional (hadoop works in on dimension => need transformations)
+    - Classification is usually high-dimensional (hadoop works in one dimension => need transformations)
     - Need real-time scoring (hadoop built for batch processing => only use for learning and score elsewhere)
 1. Bagging vs boosting
     - ![image](images/bagging_vs_boosting.png)

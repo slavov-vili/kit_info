@@ -10,8 +10,7 @@
 1. Error rate
     - Positives = class is predicated correctly
     - Negatives = ... incorrectly
-    - Accuracy  = proportion of correctly positives over whole set
-
+    - Accuracy  = proportion of correctly positives over whole set (P / (P + N)
 1. Re-substitution
     - Use *training* data to test if the model works at all
     - See if model / function can be approximated
@@ -25,8 +24,8 @@
         * Only shows how good the results are for the training data
     - Solution
         * Split data into training and test sets
-        * Statistically independent sets (something with light sensors during the day and at night)
         * Sets are selected randomly
+        * Statistically independent sets (something with light sensors during the day and at night)
         * For context-sensitive systems
             + Sets may differ in passive context (data from different countries)
             + A testing strategy should reflect the test scenario (train on A, test on B and vice versa)
@@ -36,7 +35,6 @@
             + larger test set = more accurate error estimation
             + low set independence = better test score
             + only tells us if the algorithm is applicable or not
-    
 1. Holdout
     - Split all data into training and test
     - Usually 1/3 test and 2/3 training
@@ -46,7 +44,7 @@
     - Performance measurement tools
         * Confusion matrices
             + Summary of the model's predictions compared to the actual labels
-            + TODO: image
+            + ![image](images/confusion_matrix.png)
         * Area Under Curve (AUC)
             + Aggregated metric
             + Plot the Receiver Operating Characteristic (ROC) curve (true positives (TP) x false positives (FP)) at various threshold values
@@ -70,13 +68,10 @@
             + G-score (Fowles-Mallows index): geometric mean of precision and recall
                 - better than F-score when class imbalance & negative class is of interest
                 - = sqrt(precision * recall)
-
     - Repeated Holdout
         * More reliable holdout by repeating
         * Randomly select training and test sets in each iteration
         * Average error rates for final error rate
-
-
 1. x-fold Cross-validation
     - repeated holdout not optimal (different test sets cause overlap)
     - this avoids the overlap
@@ -94,14 +89,12 @@
             + N-N/x training
             + N/x validation
         * x = N => (N-1; 1)
-        * Generate x (= N) training instances
-        * Repeatedly train the classifier on each of them and average the error rate
-        * Training instance = a given class?
+        * Foreach record in the dataset: train on the rest and test on it
         * Procedure
             + Train on everything but record x_i
             + Evaluate on x_i and see if correct or in error
             + Repeat for all i (1 - N)
-            + Total error = proportion of incorrectly classifier x_i
+            + Total error = proportion of incorrectly classified x_i
         * Features
             + Makes good use of (small) datasets
             + Does not involve random subsampling
@@ -118,7 +111,6 @@
         * timeseries cross-validation
             + Tries to catch temporal connections between data
             + Rolling window: train on data in the window
-
 1. The 0.632 bootstrap
     - Sample of size N (bootstrapping sample)
     - The rest is test

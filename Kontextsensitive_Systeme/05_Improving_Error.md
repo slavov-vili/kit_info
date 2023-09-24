@@ -8,14 +8,15 @@
         * Resampling / Weighting of instances according to costs
     - Ocram's Razor
         * Best model is the simplest one which describes all data
-
+        * An overly complex model can cause overfitting
 1. Ensemble Learning
     - What?
         * Combining multiple Models
         * Build different simple models and let them decide together
         * Advantage: often improves predictive performance
         * Disadvantage: output usually hard to analyze
-    - Bagging (TODO: image)
+    - ![image](images/ensemble_learning.png)
+    - Bagging
         * Combines predictions by voting / average (less variance, more classifiers = better)
         * Idealized version: train a classifier for each training set and combine their results
         * Unstable learning scheme -> small changes in data make big changes in model
@@ -27,7 +28,7 @@
         * Decision trees sensitive to data (good when training independent classifiers)
         * Rest is test data (Out of Bag Error)
             + Find all models which aren't trained on a sample
-            + Compare majority vote of those with ground truth
+            + Compare majority vote with ground truth
             + Calculate the error over all instances
         * Forests implicitly show confidence of prediction (number of trees which share the prediction)
         * Randomization
@@ -85,16 +86,17 @@
     - Correlations of sensors typically seen in many applications
     - Find best classifier by turning off features and testing
     - Filters
+        * Rank individual features based on statistical significance to the output variables (classes)
         * Select variables regardless of model
         * E.g. remove correlated features or least significant component
         * Use mutual info, correlation or distance/similarity scores for ranking/selection
         * Tradeoff between redundancy and relevance: minimum-Redundancy-Maximum-Relevance
     - Wrappers
-        * Evaluate subsets of features
+        * Evaluate subsets of features (train and test models)
         * Good performance, risk of overfitting
         * Computationally complex
     - Embedded Methods
-        * Coupled with learning mechanisms
+        * Coupled with learning mechanisms (to see which features are least important)
         * Recursive Feature Elimination algorithm: repeatedly construct model with SVM and remove features with low weights
         * Computationally between filters and wrappers
     - Adding features can increase or decrease accuracy (regardless of information gain)
@@ -128,3 +130,5 @@
     - Finds clusters of arbitrary shape
     - Robust to outliers
     - Choosing Epsilon and MinPts is black magic (need understanding of data)
+1. Deep Learning (each layer learns more sophisticated features)
+1. Autoencoders (learn a compact representation of the data => dimensionality reduction)

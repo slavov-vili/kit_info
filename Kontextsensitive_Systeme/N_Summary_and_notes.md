@@ -4,7 +4,7 @@
     - Fachbegriffe kennen
 1. Sprache
     - Egal, nur nicht switchen
-    - Begriff können auch auf Englisch
+    - Begriffe können auch auf Englisch
 1. Übung
     - Davor schicken und erklären können
 

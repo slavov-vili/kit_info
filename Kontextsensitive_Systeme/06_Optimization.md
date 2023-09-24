@@ -43,7 +43,7 @@
         * Evaluate the objective function on the values to get the initial data points
     - Surrogate (Probabilistic) Model
         * Idea: capture the underlying behavior of the objective function
-        * Common choices: Gaussian Processes (G), Random Forests, etc.
+        * Common choices: Gaussian Processes (GP), Random Forests, etc.
     - Acquisition Function
         * Chooses where to sample next
         * Exploration = sample in uncertain regions
