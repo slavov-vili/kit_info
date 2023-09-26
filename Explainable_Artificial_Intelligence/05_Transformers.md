@@ -4,7 +4,7 @@
     - LSTM and GRU
     - Problems with RNNs
         * Sequential processing of inputs: slow computation
-        * Localization: state mostly influenced bed recent tokens
+        * Localization: state mostly influenced by recent tokens
         * Single direction context: either left -> right or right -> left (partially solved by BiLSTM)
 1. Transformers intro
     - Combines the attention mechanism of pre-existing Resnet-like MLPs
@@ -17,7 +17,7 @@
     - Intuition
         * Similar to searching in a database
         * Each token "searches the DB" for relevant tokens
-        * Query (Q) = represents what an input token is search for
+        * Query (Q) = represents what an input token is searching for
         * Key (K) = the public image of the token (helps others find it)
         * Value (V) = information that a token wants to share with others
         * Each token's representation is updated based on the most relevant tokens in the sequence
@@ -96,7 +96,7 @@
         * Map the inputs into a shared latent space
         * Use cosine-similarity co compare inputs in the latent space
         * Self-supervised training
-            + Sample a batch of pairs from the dataset
+            + Sample a batch of (image,text)-pairs from the dataset
             + Encode separately and project onto the latent space
             + Compute the cosine-similarity of all pairs in the batch
-            + Compute the contrastive loss function (similar => close, dissimilar => far)
+            + Train using contrastive loss (if similar => should be close, if dissimilar => should be far)

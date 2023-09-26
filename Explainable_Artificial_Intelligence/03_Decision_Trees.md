@@ -9,7 +9,7 @@
     - A value used to make a decision
     - Finding the optimal one:
         * Foreach feature:
-        * sort values 
+        * sort values
         * average of each 2 consecutive ones is a potential boundary
         * each pair (feature and candidate threshold) is a potential boundary
 1. Boundaries
