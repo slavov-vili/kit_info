@@ -134,7 +134,14 @@
     - physische Repräsentation nicht offensichtlich
 1. Anfragesprachen
     - Features
-        * Gerichtete Kanten = Komplikationen und Chancen
+        * Gerichtete Kanten => Komplikationen und Chancen
         * Wiederholung von Muster
             + Eindimensional: Pfad-Labels (Gib mir alle Pfade mit Labels (ab)+)
             + Mehrdimensional: z.B. Dreiecke
+    - Beispiel: kürzeste Wege
+        * Primitiv "kürzester Weg"?
+            + Wie ist es definiert? Anzahl Streckenabschnitte vs km?
+    - Beispiel: Zentralität
+        * foreach Knoten: Wichtigkeit im Graphen bestimmen
+        * z.B. Soziales Netzwerk
+        * Idee: Anzahl ausgehender Kanten?
