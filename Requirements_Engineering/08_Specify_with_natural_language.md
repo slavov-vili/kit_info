@@ -57,3 +57,15 @@
         * Help make the story more precise
     - Standard template:
         * As a <role> I want to <requirement> (so that <benefit>)
+1. All-quantification and exclusion
+    - Avoid, because there are always exclusions
+    - Specify found exceptions as requirements
+    - Example: cancelling an action of a coffee machine
+        * Cancel before paying? Between paying and filling cup?
+1. Dealing with redundancy
+    - Natural language is often (deliberately) redundant (assures success even on information loss)
+    - Not a good thing in requirement specification
+        * Requirements are specified multiple times
+        * If there are changes - need to keep consistent
+    - Only use redundancy to abstract (when talking about the abstract vision of the product)
+    - Avoid local redundancy (e.g. never ever)
