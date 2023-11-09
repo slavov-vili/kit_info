@@ -1,0 +1,34 @@
+The algorithm is quicksort with the first element being the pivot.
+
+
+The code after label f first checks the two base cases:
+1. If the partition is of size 1 (cmp rsi, 1) -> return
+2. If the partition is of size 2 (cmp rsi, 2) -> go to l3 (swap if needed)
+3. Then it stores the pivot element (mov r8, [rdi]), initializes an increment to 0 (xor rcx, rcx) and stores the size of the current partition in rdx.
+
+
+The code after label l0 iterates until it finds the next bigger element in the partition.
+1. cmp rcx, rdx: makes sure the iteration only goes until the end of the partition.
+2. mov rax, [rdi + 8*rcx] = read the next element
+3. If there is no bigger element -> go to l2
+4. else -> go to l1
+
+
+The code after label l1 iterates until it finds the next smaller element from the end of the partition.
+1. cmp rdx, rcx: makes sure the backwards iteration only goes until the bigger element that was found earlier
+2. mov rax, [rdi + 8*rdx] = read the next element
+3. If there is no smaller element -> go to l2
+4. else -> swap the bigger and the smaller element and then go to l0
+
+
+The code after label l2 calls the algorithm on the 2 partitions.
+1. swap the current element and the next bigger (first 3 lines).
+2. call f on the left part of the array: same start element and the new partition size (mov rsi, rcx).
+3. calculate the new partition size (sub rsi, rcx) and the new first element (lea rdi, [rdi + rcx*8])
+4. call f on the right part of the array (calculated in 3.)
+
+
+The code after label l3 compares the current element ([rdi]) and the next one ([rdi + 8]). If the first one is bigger -> swap them, else -> return.
+
+
+The code after label l4 returns.
