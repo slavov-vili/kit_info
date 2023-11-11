@@ -1,0 +1,20 @@
+I first used the help command to familiarize myself with common gdb commands.
+
+My initial idea was to use the asm layout for a more interactive experience, but this makes learning the commands
+very inconvenient, since the arrow keys don't work.
+
+So I used the "disass(emble)" command view the code of the program.
+First on the main function and then on the scramble, rotate_left and print ones.
+I tried to use it on printf@plt as well, this is how I learned that this is how library functions are called.
+
+Then I used the break (b) command to set some breakpoints in main and scramble.
+
+I used the run (r) and continue (c) commands to reach those breakpoints.
+At each breakpoint I used the info (i) register (r) command to view the contents of various registers.
+Additionally I used the examine (x) command to view some memory locations as well as the stack (x/16xg $rsp).
+
+I misunderstood the task, so I spent some time running the program with various number of parameters to see how
+the registers would change. Then I thought the flag is the input to rotate_left, so I messed around with that as well.
+
+Finally I set a breakpoint in main where print is called (main + 23) and just looked at the contents of the rdi
+register (i r rdi).

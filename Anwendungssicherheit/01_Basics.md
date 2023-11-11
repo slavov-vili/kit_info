@@ -5,11 +5,11 @@
     - 64-bit:
     - ![image](images/registers_64bit.png)
 1. Instructions
-    - **Index**/AT&T Syntax = Left/Right is the target
+    - **Intel**/AT&T Syntax = Left/Right is the target
     - Basics:
         * mov rax, 10    // rax = 10
         * add rbx, rcx   // rbx += rcx
-        * sub eax, [rdx] // eax -= \<value at address = value at rdx)\>
+        * sub eax, [rdx] // eax -= \<value at address = value of rdx)\>
         * or edi, esi    // edi |= esi (bitwise or)
         * shr esi, 3     // esi >>= 3  (shift right)
     - Stack Control:
@@ -44,6 +44,12 @@
             + carry = carry occurred on the highest bit
         * cmp rax, 10
         * ![image](images/conditional_jumps.png)
+        * Signed
+            + jg = jump if greater
+            + jl = jump if less
+        * Unsigned
+            + ja = jump if above
+            + jb = jump if below
     - Other useful instructions
         * xchg rax, rbx           // exchange values
         * lea rax, [rbx + 8\*rdi] // rax = rbx + 8\*rdi
@@ -70,13 +76,14 @@
     - mostly similar to cdecl
     - first 6 args in rdi,rsi,rdx,rcx,r8,r9
     - further args - on the stack
-    - **callee must preserve** rbx,rbp,r12-r15
+    - **callee must preserve** rbx,rsp,rbp,r12-r15
     - Example:
     - ![image](images/conventions_systemv.png)
 1. Microsoft x64 ABI
     - 64 bit
     - mostly analogous
     - arguments in rcx,rdx,r8,r9
+    - further args - on the stack
     - 32-byte "red zone" between return address and arguments
     - **callee must preserve** rbx,rbp,rdi,rsi,r12-r15
 1. fastcall
@@ -97,9 +104,13 @@
     - r = run
     - b main = breakpoint
     - si = step instruction
-    - p\x = print?
-    - x/ = examine?
-    - disassemble = ?
+    - x/rfs = examine memory address
+        * r = repeat count
+        * f = format letter (hex, decimal, string, char)
+        * s = size (byte, halfword, word, giant)
+        * $rip = value of rip
+            + use rsp to view stack
+    - disass(emble) = show contents of label
 
 
 
