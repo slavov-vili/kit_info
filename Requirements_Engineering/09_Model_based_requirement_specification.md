@@ -91,3 +91,107 @@
         * Cons
             + Ignores functionality and behavior (from a user's perspective)
             + UML: Deep nesting not possible within 1 diagram
+    - ![image](images/class_vs_object_model.png)
+
+
+
+# Requirements Engineering Practices
+1. Behavior Modeling
+    - Goal: describe dynamic system behavior
+        * Examples: How does it react to external events? How do components interact?
+    - Means:
+        * Harel statecharts /UML state machines
+        * Sequence diagrams (mostly to model individual scenarios)
+        * Final State Machines (FSMs) (not discussed)
+        * Petri nets (not discussed)
+1. State charts
+    - ![image](images/state_machine_diagram.png)
+        * Black dot = starting state
+        * 2x high-level modes
+        * Normal mode has substates (closed, validating, open)
+        * Arrows = transitions between states
+        * ------ = trigger / reaction
+    - Models dynamic behavior
+        * How does the system react to external events?
+        * Reaction depends on the actual state
+        * State can be hierarchical (nester) or orthogonal (parallel)
+    - In UML: state machine diagram
+    - Pros
+        * Global view of system behavior
+        * Precise, but still readable (uses natural language)
+    - Cons
+        * Weak for modeling functionality and data
+        * Not great for modeling timeout behavior
+1. Sequence Diagrams
+    - ![image](images/sequence_diagram.png)
+    - Models
+        * the lifelines of system components and objects 
+        * messages that they exchange
+    - Terminology: UML
+        * Older term: Message Sequence Chart (MSC)
+    - Pros
+        * Visualizes component collaboration/interaction on a timeline
+    - Cons
+        * In practice: only for required scenarios (otherwise - too complex)
+        * Design-oriented => can detract from modeling requirements
+
+
+
+# Function and flow modeling
+1. What?
+    - Activity models
+    - Models Data/Information flow
+    - Process and workflow models
+1. Activity modeling
+    - ![image](images/uml_activity_diagram.png)
+        * Legend
+            + Oval = activity
+            + Arrows = transitions/flow
+            + Rhombus with 1 exit = join node
+            + Rhombus with n exits = decision node (with conditions)
+        * Models process activities and control flow
+        * Can model data flow, but not great
+        * Semantics based on Petri nets (transitions start when state is done)
+        * Differences from statecharts
+            + Have to manually model polling until a card is presented
+            + Idea: flow of multiple tokens at the same time
+            + Transitions fire after state is finished (no additional triggers like: wait for 5s)
+1. Data and Information flow modeling
+    - ![image](images/data_information_flow.png)
+        * Things between --- = files
+    - Models system functionality with data flow diagrams
+    - Used more rarely today, but useful if data flow is important
+    - Pros
+        * Easy to understand
+        * Supports system decomposition (can separate individual processes)
+    - Cons
+        * Outdated data treatment (no types, encapsulation, etc.)
+            + can't be tied to classes or anything, just labels
+1. Process and Workflow modeling
+    - Elements
+        * Process/Work steps
+        * Events which influence the flow
+        * Control flow
+        * (optional) Data/Information access and responsibility
+    - Typical languages: UML activity diagrams, BPMN, Even-driven process chains
+    - Business Process Model and Notation (BPMN)
+        * ![image](images/bpmn.png)
+            + Start node = big white circle
+            + Also has decision nodes
+            + Separates responsibility (ticket office vs skier)
+            + Adds more detailed labels
+            + envelope symbol = communicate via email (black = send, white = receive)
+            + clock symbol = timeout
+            + plus symbol = connects to another process
+1. Event-driven process chains (EPC)
+    - ![image](images/epc.png)
+    - German invention: ereignisgesteuerte Prozessketten (EPZ)
+    - Alternating function-\>event sequences
+
+
+
+# User-system interaction modeling
+1. Description of the system from a user's perspective
+    - Key terms:
+        * Use case
+        * Scenario
