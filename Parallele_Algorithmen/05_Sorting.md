@@ -18,11 +18,17 @@
             * calculate the rank of each row element with respect to the col elements
         * reduce = sum ranks in row (global rank)
     - Local Ranking Notes
-        * foreach y in r do
-        *   j=1
-        *   while y < c[j] do
-        *       j++
-        *   output j-1
+    ```
+        foreach y in r do
+          j=1
+          while y < c[j] do
+              j++
+          output j-1
+    ```
         * works in linear time
     - Analysis Notes
         * 
+
+
+
+# Quicksort

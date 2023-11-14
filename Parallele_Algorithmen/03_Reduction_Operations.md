@@ -27,17 +27,19 @@
 1. Algorithm
     - ![image](images/reduction_pram.png)
     - PRAM Code
-        * i in {0,...,n-1} // PE index
-        * active = 1
-        * for 0 <= k < round(log(n)) do // iterate to calculate indices
-        *   if active then
-        *       if bit k of i then      // k = 0 => PE has odd index
-        *           active = 0
-        *       else if i+2^k < n then  // check if there is a value to take
-        *       // makes sure this works when n is not a multiple of 2
-        *       // if n=5, PE 4 doesn't have anyone to take a value from (i in 0-4)
-        *           xi = xi + x(i+2^k)  // add my value to that of the next PE
-        * // Result is in x0
+    ```
+        i in {0,...,n-1} // PE index
+        active = 1
+        for 0 <= k < round(log(n)) do // iterate to calculate indices
+          if active then
+              if bit k of i then      // k = 0 => PE has odd index
+                  active = 0
+              else if i+2^k < n then  // check if there is a value to take
+              // makes sure this works when n is not a multiple of 2
+              // if n=5, PE 4 doesn't have anyone to take a value from (i in 0-4)
+              xi = xi + x(i+2^k)  // add my value to that of the next PE
+        // Result is in x0
+    ```
     - Analysis
         * Time = O(log(n))
         * Speedup = O(n/log(n)) (Tseq = linear = n)
@@ -77,9 +79,11 @@
     - Basics
         * n^3 PEs, one for each sum cikj
     - Code
-        * for i in [1, n] dopar
-        *   for j in [1, n] dopar
-        *       cij = Sum(aik * bkj), k in [1, n] // n PE parallel sum
+    ```
+        for i in [1, n] dopar
+        for j in [1, n] dopar
+           cij = Sum(aik * bkj), k in [1, n] // n PE parallel sum
+    ```
     - Analysis
         * Time = O(log(n))
         * Efficiency = O(1 / log(n))

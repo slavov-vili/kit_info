@@ -59,12 +59,14 @@
         * if not x[i] then memory[result] = 0
     - Maximum on Common CRCW PRAM
         * ![image](images/max_common_crcw.png)
-        * Input: A[1..n]                            // distinct elements
-        * Output: M[1..n]                           // M[i] = 1 iff A[i] is max
-        * forall (i,j) in {1..n}^2                  // create a nxn matrix
-        *     dopar B[i,j] = A[i] >= A[j]           // each entry = 1 if >=, 0 otherwise
-        * forall i in {1..n}                        // for each row
-        *     dopar M[i] = AND B[i, j], j in {1..n} // = AND of all values in the row
+    ```
+        Input: A[1..n]                            // distinct elements
+        Output: M[1..n]                           // M[i] = 1 iff A[i] is max
+        forall (i,j) in {1..n}^2                  // create a nxn matrix
+            dopar B[i,j] = A[i] >= A[j]           // each entry = 1 if >=, 0 otherwise
+        forall i in {1..n}                        // for each row
+            dopar M[i] = AND B[i, j], j in {1..n} // = AND of all values in the row
+    ```
         * O(1) time
         * Theta(n^2) PEs (a lot!)
 1. Algorithm Analysis
