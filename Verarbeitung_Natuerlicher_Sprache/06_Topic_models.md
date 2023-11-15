@@ -23,7 +23,6 @@
         * M = 
 1. Matrix factorization
     - ![image](images/dataset_as_matrix.png)
-    - TODO: explain
     - Method: SVD -> latent semantic analysis
 
 
@@ -63,22 +62,25 @@
         * Squares = replications (how many of each)
         * For each topic
             + Draw multinomial distribution from dirichlet distribution
-            + Example: TODO: image
+            + ![image](images/graphical_model_topics.png)
         * For each document
             + Same but for documents and topics
-            + Example: TODO: image
+            + ![image](images/graphical_model_documents.png)
         * For each word position
+            + ![image](images/graphical_model_positions.png)
             + Select a hidden topic
             + Select the word's distribution depending on the topic
     - Inference
         * Define posterior distribution
-        * TODO: image
+            + ![image](images/graphical_model_posterior.png)
         * Infer
             + Topic assignment per word
             + Topic proportions per document
             + Topic distribution per corpus
         * Posterior inference
-            + TODO: explain
+            + ![image](images/graphical_model_inference.png)
+            + Challenge: cannot be computed
+            + Solution: approximate using Gibbs sampling
 
 
 
