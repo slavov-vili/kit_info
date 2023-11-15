@@ -194,4 +194,64 @@
 1. Description of the system from a user's perspective
     - Key terms:
         * Use case
+            + Description of possible interactions between users and system which provide added value
+            + Example: buying a ticket
+            + Specifies the system from a user's perspective: describes functionality that the system must provide
+            + In a way a bundle for functionality
+            + Use case diagrams (provide an overview)
+            + Use case descriptions (provide the details)
         * Scenario
+            + Description of potential series of events which leads to a desired/unwanted result
+            + Ordered sequence of interactions between partners (system and external actors)
+            + Instance scenario = concrete sequence
+            + Type scenario (use case) = potential sequence
+            + In UML: Execution trace of a use case
+    - Representation options
+        * Free text (natural language)
+        * Structured text (natural language)
+        * Statechart / UML State machine
+        * UML activity diagram
+        * Sequence diagrams (MSCs)
+1. Modeling use cases
+    - UML Use case diagram
+        * ![image](images/uml_use_case_diagram.png)
+        * Pros
+            + Provides abstract overview from the perspective of actors
+        * Cons
+            + Ignores required functions and data
+            + Does not properly model hierarchies and dependencies
+    - Modeling dependencies
+        * UML can only do inclusion, extension, generalization
+        * What about
+            + control flow dependencies (sequence, alternative paths, iteration)?
+            + hierarchy decomposition
+        * Solutions
+            + Use pre- and postconditions
+            + Statecharts
+            + Other older methods
+    - Using pre- and postconditions
+        * ![image](images/dependency_pre_and_postconditions.png)
+        * Can model simple sequences (post of A = pre of B)
+        * Focus on descriptions, no overview of relationships
+        * No hierarchical decomposition
+    - Mini exercise: use case
+        * ![image](images/use_case_description.png)
+
+
+
+# Modeling goals
+1. Basics
+    - Helps go into the right direction and achieve shared understanding
+    - Goals can be decomposed in sub-goals
+        * Can provide context for lower-level requirements
+    - Decomposition modeled using AND/OR trees
+    - Considering multiple goals = directed goal graph
+1. Goal Modeling
+    - AND/OR trees
+        * ![image](images/goal_trees.png)
+    - Goal-agent networks
+        * Explicitly models agents, their goals, tasks which achieve the goals, resources and dependencies
+        * i\* is the most used approach
+1. Unified Modeling Language (UML)
+    - UML specification = loosely connected diagrams of various types
+    - Additional constrains using OCL (Objct Constraint Language = formal textual language)
