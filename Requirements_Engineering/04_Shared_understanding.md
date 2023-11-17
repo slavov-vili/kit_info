@@ -8,7 +8,7 @@
 
 
 # Types of shared understanding
-# TODO: image
+1. ![image](images/shared_understanding_types.png)
 1. Explicit / Implicit = does it need to be written down or said or not
 1. True / False = Do all stakeholders have sufficiently similar idea
 1. Relevant / Irrelevant = Is it relevant to the product

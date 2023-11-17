@@ -14,7 +14,8 @@
 
 
 # Dimensions of processes
-1. Linear vs Evolutionary (TODO: image)
+1. Linear vs Evolutionary
+    - ![image](images/dimensions_of_processes.png)
     - When Linear?
         * Clear, stable, a priori known requirements
         * Low risk (of developing the wrong system)

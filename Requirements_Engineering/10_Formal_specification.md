@@ -46,3 +46,61 @@
             + changes the state
         * Query: availability
             + ![image](images/z_example_library_availability.png)
+
+
+
+# Object Constraint Language (OCL)
+1. What?
+    - Textual formal language
+    - Used to make UML models more precise
+    - OCL expressions are attached to UML elements which add context (self)
+1. Why?
+    - Can specify invariants (i.e. additional restrictions) on UML models
+    - Specifies the semantics of operations (pre- and post-conditions)
+    - Can also be used to query UML models
+1. Example: invariants
+    - ![image](images/ocl_example_invariants.png)
+    - Can be part of the UML model (inline context is implicit)
+    - Can be written separately (context is explicit)
+1. Example: semantics of operations
+    - ![image](images/ocl_example_operation_semantics.png)
+    - -> = navigation from current object to a set of associates ones (set of documents)
+1. Important constructs
+    - ![image](images/ocl_constructs.png)
+    - Specifying what should change: self.var = self.var@pre...
+
+
+
+# Proving properties
+1. What?
+    - Formal models let us prove that a model has some property (safety-critical invariants)
+    - Classic Proof = property can be inferred from given logical statements
+    - Model Checking = explores all states of a model and proves that the property holds for all of them
+    - Pros
+        * Model Checking is fully automatic and failures are basically counter-examples
+        * Exploring the subset of feasible states = systematic, automated test
+    - Cons
+        * Classic Proofs are hard and labor-intensive
+        * Exploring the full state space is often unfeasible
+
+
+
+# Benefits, limitations and practical use
+1. Benefits
+    - Unambiguous per definition
+    - Fully verifiable
+    - Important properties can be
+        * proved
+        * tested automatically
+1. Limitations / Problems
+    - Expensive, but not much value?
+    - Stakeholders cannot read them. How to validate?
+    - Primarily for functional requirements
+1. Practical application
+    - Not used much
+    - Reality
+        * possible and reasonable for safty-critical components
+        * Broad use
+            + not possible (validation problems)
+            + not reasonable (costs exceed benefit)
+    - Alternative: use semi-formal models, but formalize critical parts

@@ -79,7 +79,8 @@
         * Technical feasibility: non-feasible requirements are useless
         * Validation: what you see is what you require
 
-1. Requirements vs Design Decisions (TODO: image)
+1. Requirements vs Design Decisions
+    - ![image](images/requirements_vs_design.png)
     - Depends on the level of decision making (a design decision turns into a requirement)
     - Requirement layers (railway system)
         * Business: More people shall be transported using the current tracks

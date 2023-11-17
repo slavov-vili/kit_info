@@ -9,7 +9,8 @@
 
 
 # Classification dimensions
-1. Concerns (TODO: image)
+1. Concerns
+    - ![image](images/requirement_concerns.png)
     - function = system's behavior, data, input, reaction, regardless of implementation
     - quality = a quality that the system should have
     - constraint = restriction on what, how, prescribed solutions

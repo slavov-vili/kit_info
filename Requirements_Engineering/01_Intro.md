@@ -1,3 +1,8 @@
+# Outline
+![image](images/outline.png)
+
+
+
 # Definitions
 1. Requirement
     - A need perceived by a stakeholder
