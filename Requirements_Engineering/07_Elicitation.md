@@ -58,7 +58,7 @@
 
 1. Eliciting types of requirements
     - Functional Requirements
-        * Who wants to achieved what with the system?
+        * Who wants to achieve what with the system?
         * For every identified function
             + What's the desired result and who needs it?
             + Which transformations and inputs are needed?

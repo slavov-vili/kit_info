@@ -17,6 +17,7 @@
     - Implicit: red light = stop signal
     - Explicit: The stop signal shall be represented using a red light
     - False implicit misunderstanding:
+        * Requirement: nothing
         * Stakeholders: go = green or yellow flashing
         * Developers: go = green
     - False explicit misunderstanding:
@@ -29,7 +30,7 @@
     - Dark information:
         * Legal constraint that no flashing yellow with red on other side
         * Nobody is aware of it
-1. Paraphrasing:
+1. Paraphrasing: Do good software development by
     - P1: Achieving shared understanding by explicit specifications as far as needed
     - P2: Relying on implicit shared understanding of relevant information as far as possible
     - P3: Determining the optimal amount of explicit specifications
@@ -37,7 +38,7 @@
     -  Value = Benefit - Cost
         * Benefit of explicit specification = lower probability that the system won't satisfy the stakeholder's expectations & needs
         * Cost of writing, reading and maintaining the specification
-1. Enablers
+1. Enablers of shared understanding
     - Domain knowledge exists
     - Previous joint work or colab
     - Reference systems exist
@@ -45,7 +46,7 @@
     - Mutual trust (e.g. company builds bridge not connected to the street, because not specified)
     - Contractual situation
     - Normal design (e.g. same as other systems in the same environment)
-1. Obstacles
+1. Obstacles to shared understanding
     - Contractual situation
     - Radical design (e.g. i.o.t, digital twin, different understandings)
     - Geographical distance (reduces communication)

@@ -19,33 +19,37 @@
     - Representation (Same requirement can be represented in different ways)
         * Operational
             + operation or data
+            + process/action verb is used or statements about what NOT to do
             + Validation: Review, test, formal validation
+            + Example: shall count the number of unlocks
         * Quantitative
             + measurable property
             + Validation: Measurement
+            + Example: must be available for 99.99% of the time
         * Qualitative
             + goals
+            + can't have hard satisfaction
             + Validation: Not directly. Prototype, subjective stakeholder judgement, goal refinement, derived metrics
+            + Example: should be highly available
         * Declarative
             + required property
             + Validation: Review
+            + Example: must comply with privacy laws
     - Satisfaction
+        * ![image](images/satisfaction.png)
         * Hard (Either satisfied or not)
         * Soft (Degree of satisfaction)
     - Role
-        * Prescriptive (What should a system do/have)
-        * Normative (Given by the environment: laws)
-        * Assumptive (Not about the system, but about other systems, users, etc. More so assumptions)
-1. Representations
-    - Examples
-        * Qualitative: should be highly available
-        * Quantitative: must be available for 99.99% of the time
-        * Declarative: must comply with privacy laws
-        * Operational: shall count the number of unlocks
-    - How to distinguish
-        * Operational: process/action verb is used or statements about what NOT to do
-        * Declarative vs qualitative: validated by review vs not
-        * Qualitative: can't have hard satisfaction
+        * Prescriptive
+            + Classic What should a system do/have
+            + Example: Sensor X shall be read every 100 ms
+        * Normative
+            + A norm in the environment, which is relevant for the system (laws)
+            + Example: A social security number uniquely identifies a person
+        * Assumptive
+            + Not about the system, but about other systems, users, etc. More so assumptions
+            + Required behavior of an actor who interacts with the system
+            + Example: The operator shall accept every accept message
 1. Interesting example
     - Requirement 1: any unauthorized access to data should be prevented
         * Concern: Quality, Security
@@ -53,18 +57,5 @@
         * Concern: Also quality: security
     - Neither is functional
     - 1 is qualitative and 2 is operational
-1. Satisfactions
-    - Graph: value x degree of fulfillment
-1. Roles
-    - Prescriptive
-        * Classic
-        * E.x. Sensor X shall be read every 100 ms
-    - Normative
-        * A norm in the environment, which is relevant for the system
-        * E.x. A social security number uniquely identifies a person
-    - Assumptive
-        * Required behavior of an actor who interacts with the system
-        * E.x. The operator shall accept every accept message
-    - The roles make norms and assumptions explicit
-        * Allows for them to be treated differently
-
+1. More examples
+    - ![image](images/classified_requirements.png)

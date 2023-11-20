@@ -22,9 +22,9 @@
 1. Rules for specifying in natural language
     - Use active voice
     - Use defined subjects
-    - Build phrases with complete verbal structure (sinding stuff -> where?)
+    - Build phrases with complete verbal structure (sending stuff -> where?)
     - Use terms as defined in the glossary
-    - Define precise meanings for auxiliary verbs (shall, should, must, may, etc.) and process verbs (product, generate, create, etc.)
+    - Define precise meanings for auxiliary verbs (shall, should, must, may, etc.) and process verbs (produce, generate, create, etc.)
         * Usually should use same auxiliary verb, otherwise the reader assumes things about the requirements
     - Replace unspecific nouns (the data / customer / display) where appropriate
     - When comparing: specify a reference point (faster than what?)
@@ -46,7 +46,7 @@
 1. Phrase templates
     - Use templates to create well-formed natural language requirements
     - Typical template:
-        * (<Condition>) <Subject> <Action> <Objects> (<Restrictions>)
+        * (\<Condition\>) \<Subject\> \<Action\> \<Objects\> (\<Restrictions\>)
         * Example:
             + When a valid card is sensed, the system shall send the command 'unlock' to the turnstile within 100ms.
 1. Agile user stories
@@ -56,7 +56,7 @@
     - Accompanied by acceptance criteria
         * Help make the story more precise
     - Standard template:
-        * As a <role> I want to <requirement> (so that <benefit>)
+        * As a \<role\> I want to \<requirement\> (so that \<benefit\>)
 1. All-quantification and exclusion
     - Avoid, because there are always exclusions
     - Specify found exceptions as requirements

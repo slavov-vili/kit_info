@@ -37,9 +37,7 @@
 # Models of static system structure
 1. Data Modeling: Entity-Relationship models
     - Models the **relevant part of the domain** using entity- & relationship types and attributes
-    - Example
-        * Turnstile ---belongs---> Lift ---part\_of--> ...
-        * Turnstile ---has---> Scanner
+    - ![image](images/model_data.png)
     - Pros
         * Easy to model (and explain to stakeholders)
         * Straightforward mapping to relational DB systems
@@ -114,7 +112,7 @@
     - Models dynamic behavior
         * How does the system react to external events?
         * Reaction depends on the actual state
-        * State can be hierarchical (nester) or orthogonal (parallel)
+        * State can be hierarchical (nested) or orthogonal (parallel)
     - In UML: state machine diagram
     - Pros
         * Global view of system behavior
@@ -254,4 +252,4 @@
         * i\* is the most used approach
 1. Unified Modeling Language (UML)
     - UML specification = loosely connected diagrams of various types
-    - Additional constrains using OCL (Objct Constraint Language = formal textual language)
+    - Additional constrains using OCL (Object Constraint Language = formal textual language)
