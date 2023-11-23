@@ -1,0 +1,10 @@
+How do you prevent buffer overflows?
+
+1. A basic solution would be to be careful with the order of variable declarations. (i.e. putting buffers at the end)
+In this way, control flow which depends on the non-buffer values would be more difficult to influence using buffer overflows
+(e.g. in exercise 2, we would not be able to overwrite the value of local_c using buffer overflow).
+
+
+
+2. A better solution is to only read the amount of bytes which would fit into the buffer. In c: use fgets with the buffer size
+instead of gets.

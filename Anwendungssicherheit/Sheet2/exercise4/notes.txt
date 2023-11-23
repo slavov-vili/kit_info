@@ -1,0 +1,2 @@
+/proc/<pid>/fd = file descriptors?
+012 = stds?

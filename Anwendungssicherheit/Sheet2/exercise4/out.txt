@@ -1,0 +1,8 @@
+Makefile
+exercise4
+exercise4.asm
+exercise4.o
+exercise4_test
+notes.txt
+out.txt
+/home/vilskin/Documents/kit_info/Anwendungssicherheit/Sheet2/exercise4

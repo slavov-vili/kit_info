@@ -111,6 +111,8 @@
         * $rip = value of rip
             + use rsp to view stack
     - disass(emble) = show contents of label
+    - Can run on a running process with -p
+        * Find process using ps or pidof
 
 
 
