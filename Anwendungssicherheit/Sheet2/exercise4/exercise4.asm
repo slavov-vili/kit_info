@@ -1,8 +1,5 @@
 bits 64
 
-out_file db "out.txt", 0
-shell db "/bin/sh", 0
-
 global _start
 
 ; these constants are taken from /usr/include/x86_64-linux-gnu/asm/unistd_64.h
@@ -25,7 +22,9 @@ _start:
 	%define file_descriptor 0x3
 
 	mov rax, open_syscall_no              ; Set syscall code
-	lea rdi, [out_file]                   ; Store the address to the filename
+	mov rdi, "out.txt"
+	push rdi
+	lea rdi, [rsp]                          ; Store the address to the filename
 	mov rsi, O_WRONLY | O_CREAT | O_TRUNC ; Set the flags (write, create, truncate)
 	mov rdx, S_IRUSR | S_IWUSR            ; Set the modes (read and write permissions for user)
 	syscall
@@ -53,7 +52,9 @@ syscall
 
 
 mov rax, execve_syscall_no
-lea rdi, [shell]
+mov rdi, "/bin/sh"
+push rdi
+lea rdi, [rsp]                          ; Store the address to the filename
 xor rsi, rsi
 xor rdx, rdx
 syscall
