@@ -3,10 +3,9 @@
     - Sequences of variable lengths (words, sentences, documents)
     - Properties depend on context
 1. Example
-    - TODO: image
-    - Notes
-        * Number of classes is fixed (POS Tags)
-        * 1 to 1 correspondence
+    - ![image](images/pos_tagging.png)
+    - Number of classes is fixed (POS Tags)
+    - 1 to 1 correspondence
 
 
 
@@ -28,23 +27,54 @@
         * First idea: use a classifier for each each word
             + Words are ambiguous, so need context (neighboring words/POS tags)
             + Need to jointly model the whole sentence
-        * Probabilistic tagging
-            + TODO: explain
-            + Predicting the whole sequence
-            + Breaking up the probabilities
-            + Markov assumption?
+1. Probabilistic tagging
+    - ![image](images/probabilistic_tagging.png)
+    - Model POS Tagging as Sequence Labeling
+        * Input X = sequence of words
+        * Output Y = sequence of POS tags
+    - Machine Learning Problem
+        * Training Data = pairs of words and tags: {(x1,y1), ..., (xn, yn)}
+        * Learning = predict y given x
+        * Problem: #Solutions = #tags ^ #words
 
 
 
 # Hidden Markov Models (HMM)
 1. Model basics
-    - TODO: explain
+    - Generative model: assign joint probability to pairs of observations+labels
+    - Markov assumption: the next state only depends on the current one
+    - Independence of output: the output only depends on the current state
 1. Markov Chains
-    - TODO: explain
+    - ![image](images/markov_chains.png)
+    - Definitions
+        * Set of states
+        * Connections between states (weight = transition probability)
+        * Start/End state
+    - Often don't know the state => estimate based on observable
+    - Example: observing meals of the day and estimating who is in the kitchen
+    - In POS Tagging:
+        * States = POS tags
+        * Observations = words
 1. Formalizing HMMs
-    - TODO: explain
+    - Definitions
+        * Q = q1, ..., qn (states)
+        * A = aij (transition probability matrix)
+        * O = o1, ..., ot (observations)
+        * B = bi(ot) (output probabilities)
 1. 3 challenges
     - Probability
+        * Problem
+            + Input = HMM lambda = (A,B) & observation sequence O
+            + Output = Probability P(O)
+        * Simplification
+            + Idea: Calculate the probability of a given state
+            + P(O|Q) = multiply(P(oi|qi)), i in [1 -> T]
+        * Problem: Unknown State sequence
+            + Weighted sum over all possible sequences (weight = probability)
+            + P(O) = sum(P(Q) \* P(O|Q))
+            + P(Q) \* P(O|Q) = multiply(P(qi|qi-1) \* P(qF|qT) \* multiply(P(oi|qi))), i in [1 -> T]
+        * Forward Algorithm
+            + 
     - Decoding
     - Learning
 
