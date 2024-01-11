@@ -128,6 +128,8 @@
         * Time = O(n/p)
         * root = node with smallest id
         * root points to itself
+        * Properties
+            + Edges in path get lighter?
         * sth about tie-breaking to break up symmetrical cases
     - Rooted Trees -> Rooted Stars (by doubling)
         * ![image](images/rooted_star.png)
@@ -142,6 +144,7 @@
         * Time = O(n/p \* log(n))
     - Contraction
         * ![image](images/boruvka_contraction.png)
+        * Easier thanks to rooted stars
         * Algorithm
         ```
             k = #components
