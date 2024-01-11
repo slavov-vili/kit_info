@@ -2,4 +2,7 @@ Telematik
 Algorithmen_II
 Fortgeschrittene_Objektorientierung
 **/*.pdf
+**/*.so.*
+**/*.zip
+**/run.sh
 ghidra
