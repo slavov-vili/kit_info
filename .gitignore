@@ -6,3 +6,5 @@ Fortgeschrittene_Objektorientierung
 **/*.zip
 **/run.sh
 ghidra
+**/.metadata/
+**/.sonarlint/
