@@ -1,11 +1,16 @@
-int *pointer = malloc(sizeof(int));
-*pointer = 7;
+#include <stdlib.h>
+#include <stdio.h>
 
-free(pointer);
+int main(){
+	int *pointer = malloc(sizeof(int));
+	*pointer = 7;
 
-int *another_pointer = malloc(sizeof(int));
-*another_pointer = 5;
-     
-if (*pointer == 5) {
-     printf("Success!\n");
+	free(pointer);
+
+	int *another_pointer = malloc(sizeof(int));
+	*another_pointer = 5;
+		 
+	if (*pointer == 5) {
+		 printf("Success!\n");
+	}
 }
