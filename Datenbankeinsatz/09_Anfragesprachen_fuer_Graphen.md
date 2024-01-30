@@ -66,9 +66,6 @@
     - ![image](images/beispiel_materialwissenschaft.png)
     - Aus der Materialwissenschaft
     - Man interessiert sich für die Bewegungen und Interaktionen von Versetzungen (Fehlstellungen im Atomgitter) über die Zeit.
-    - TODO: explain
-    - Notes
-        * Loops, Junctions
 1. Anfragen
     - Übersicht
         * MATCH = Auf was zugreifen? = FROM in SQL
@@ -86,7 +83,7 @@
             + Erste Zeile = Zeilennummer (Systemgeneriert)
             + Nur Knoten mit Label 'Loop'
             + Kompakt, da keine WHERE Klause (alternativ: MATCH (n) WHERE 'Loop' in labels(n))
-            + Implizite Gruppierung (explizite Kannten = Gruppierungsschlüssel)
+            + Implizite Gruppierung (explizite Attribute = Gruppierungsschlüssel)
     - Beispiel 2: Bedingungen bezogen auf Graphstruktur
         * Ausgabe der IDs aller Loops mit burges\_vector = 4, slip\_normal = 1 und mehr als 10 Kanten.
         ```
@@ -96,7 +93,7 @@
             RETURN n.id
         ```
         * Erläuterungen
-            + burges_vector & slip_normal = Attribute, uns egal
+            + burges\_vector & slip\_normal = Attribute, uns egal
             + (n)--() = Kante, adjazent zu n (keine Aussage zum anderen Knoten)
             + size()  = Zählt Elemente in Liste/Array
             + count() = Anzahl der Werte/Knoten (siehe Beispiel 1)
@@ -111,7 +108,121 @@
         * Ausgabe
             + ![image](images/output_graph_query3.png)
         * Erläuterungen
-            + 
+            + [\*2] = Pfad, bestehend aus 2 Kanten
+            + collect = generiert Liste von Werten
+            + WITH Klausel: Transformationen durchführen und Variable für Return definieren
+            + Attributen in Return müssen nicht atomar sein (ids = Liste)
+    - Beispiel 4
+        * Für jeden Zeitpunkt und für jeden Junction-Typ - Ausgabe der Loops, die mit einer Junction dieses Typs verbunden sind.
+        ```
+            MATCH (n:Loop)-[*2]-(m:Junction)
+            WITH n.time as time, m.type as type,
+                 collect(distinct n.global_id) as ids
+            RETURN time, type, ids
+        ```
+        * Ausgabe
+            + ![image](images/output_graph_query4.png)
+        * Erläuterungen
+            + Man kann auf Kanten nicht zugreifen, das Muster muss immer mit einem Knoten enden
+            + Nur eine Kante finden: MATCH () - [k] - () RETURN k
+            + Labels einschränken oder nach Attribute filtern: [k: Label {length: 50}]
+            + Elemente in WITH und RETURN müssen nicht die gleiche Reihenfolge haben
+    - Beispiel 5: Darstellung von Pfaden
+        * Ausgabe der Anzahl aller Loops verbunden mit Junction vom Typ 1 und verbunden mit anderer Loop, die wiederum mit Junction vom Typ 2 verbunden ist.
+            + Vorgehen1: Finde zunächst beide Loops jeweils mit ihren strukturellen Eigenschaften, dann Überprüfung, dass sie ungleich sind, aber gleichen Nachbarn haben
+            ```
+                MATCH (nj:Junction {type:1})--()--(l:Loop),
+                      (mj:Junction {type:2})--()--(k:Loop)
+                WHERE l.id <> k.id AND (l)--()--(k)
+                RETURN count(distinct l.id)
+            ```
+            + Vorgehen2: Finde erst alle benachbarten Loops, dann Überprüfung der Typen
+            ```
+                MATCH (nj:Junction {type:1})--()--(l:Loop)--(:Node)--(k:Loop)--()--(mj:Junction {type:2})
+                RETURN count(distinct l.id)
+            ```
+        * Erläuterungen
+            + Optional: :Node = Bedingung für Knoten ohne Label (elementare Knoten)
+            + Je spezifischer die Query, desto schneller die Auswertung
+            + Insbesondere: Labels benutzen, an Stelle von :Node
+            + Alle Knoten in der Instaziierung des Pfads sind unterschiedlich
+            + d.h. Graph-Knoten darf in Muster nur einmal vorkommen (l.id <> k.id ist redundant)
+            + Die Abfragen sind gleichbedeutend, der Anfragenoptimierer erkennt das aber nicht
+            + Länge Pfaden erzeugen riesige Zwischenergebnisse bei dichte Graphen
+    - Spezifikation komplexer Muster
+        * ![image](images/komplexe_graphenmuster.png) 
+1. Weitere Sprachmerkmale
+    - Pfadausdrücke
+        * gerichtete vs ungerichtete Graphen
+        * Navigation über kontrollierte Anzahl von Schritte
+        * Ausgabe ganzer Pfade
+        * Ausgabe der Labels oder Attributwerte bestimmter Kanten
+        * Abstraktionen (z.B. kürzester Pfad)
+    - Pfade mit bestimmten Eigenschaften der Kanten
+        * Alle Personen, die über zwei Schritte (d. h. Kanten) mit Charlie Sheen verbunden sind, und Schritte sind ACTED_IN oder DIRECTED.
+            ```
+                MATCH (charlie {name: 'Charlie Sheen'}) - [:ACTED_IN|DIRECTED*2] - (person:Person)
+                RETURN person.name
+            ```
+            + Name enthält Leerzeichen => braucht '
+        * Alle Pfade zwischen Charlie Sheen und Martin Sheen, von denen alle Kanten für 'blocked' den Wert 'false' haben.
+            ```
+            MATCH p = (charlie:Person) - [* {blocked:false}] - (martin:Person)
+            WHERE charlie.name = 'Charlie Sheen' AND martin.name = 'Martin Sheen'
+            RETURN p
+            ```
+    - Zugriff auf Kantenlabels und -attributwerte
+        ```
+            MATCH (wallstreet {title: 'Wall Street'}) <- [r:ACTED_IN] - (actor)
+            RETURN r.role
+        ```
+        * Erläuterungen
+            + Richtung der Kanten explizit gegeben
+            + Actor entbehrlich (superfluous)
+            + für bessere Performance: actor: Actor
+        * Pfad ausgeben
+        ```
+            MATCH p = (michael {name: 'Michael Douglas'})-->()
+            RETURN p
+        ```
+    - Kürzester Pfad
+        * Kürzester Pfad zwischen Charlie Sheen und Martin Sheen, allerdings ohne die Vater-Sohn Beziehung
+        ```
+            MATCH (charlie:Person {name: 'Charlie Sheen'}),
+                  (martin:Person {name: 'Martin Sheen'}),
+                  p = shortestPath((charlie)-[*]-(martin))
+            WHERE none(r IN relationships(p) WHERE type(r) = 'FATHER')
+            RETURN p
+        ```
+        * Erläuterungen
+            + relationships(p) = alle Menge der Einzelschritte/Kanten des Pfads p
+            + WHERE = kürzester Pfad der die Bedingung erfüllt (nicht: kürzester Pfad ausgeben, wenn er die Bedingung erfüllt)
+    - Analogien zu SQL-Features
+        * Outer Join
+            ```
+                MATCH (a:Movie {title: 'Wall Street'})
+                OPTIONAL MATCH (a)-->(x)
+                RETURN x
+            ```
+            + Wenn kein Match - null
+            + Falls nur OPTIONAL MATCH - nichts ausgeben
+        * Schnittmengenberechnung
+            + Selektiere alle Filme, in denen alle Schauspieler mitgespielt haben, deren Namen in einer gegebenen Liste enthalten sind.
+            ```
+                WITH ['Keanu Reeves', 'Hugo Weaving', 'Emil Eifrem'] as names
+                MATCH (p:Person)
+                WHERE p.name in names
+                WITH collect(p) as persons
+                MATCH (m:Movie)
+                WHERE ALL(p in persons WHERE (p)-[:ACTED_IN]->(m))
+                RETURN m
+            ```
+            + Elemente der Schnittmenge müssen alle Bedingungen erfüllen/in allen Ausgangsmengen enthalten sein
+        * Aggregation
+            + RETURN [x IN range(0,10) WHERE x % 2 = 0 | x^3 ] as result = [0, 8, 64, 216, 512, 1000]
+1. Anfrageausführung
+    - Einleitung
+        * TODO: explain
 
 
 
