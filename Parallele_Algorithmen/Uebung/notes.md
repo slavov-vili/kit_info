@@ -240,3 +240,10 @@ return MST
         * Idea 2: parallel iteration over vertices with binary search over edges?
             + look for edges where u = cur edge and smaller than what?
             + lower\_bound or sth for bin search
+    - Implementation notes
+        * Could have implemented the original better
+        * Sorting slow - needs to be sped up
+            + Collect data on find-min for different samples and compare to original
+        * Original input = sorted by edge ID and weight?
+            + If so - binary search for first ocurrence?
+    - TODOs: false sharing? cache misses? original performs worse on sorted data
