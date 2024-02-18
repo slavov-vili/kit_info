@@ -13,7 +13,7 @@
     - Domain = set of all values of an Attribute
         * nicht leer, endlich
     - Tupel = Abbildung: Attribut -> Wert aus seiner Menge
-1. NF^2-Modell
+1. NF2-Modell
     - ![image](images/example_nf2_model.png)
     - Attributwerte = atomar?
     - Belegschaft = Menge von {PANr, Nachname, ...}
@@ -28,10 +28,10 @@
     - Alternativ
         * foreach Attribut: Wert muss aus der Domäne sein
         * Instanz = kreuz Produkt der Attribute
-    - Schema mit NF^2
+    - Schema mit NF2
         * 2^dom(R1) = Menge von Tupeln, die zu R1 konform ist
         * ![image](images/schema_nf2.png)
-1. Algebra für NF^2
+1. Algebra für NF2
     - TODO: relationale Algebra
     - Projektion
         * ![image](images/nf2_projektion.png)
@@ -63,4 +63,4 @@
         * Funktionale Abhängigkeit zwischen nicht-geschachtelte und geschachtelte Attribute
         * Alle geschachtelte Attribute sind in PNF
     - Flache Relation ist immer in PNF
-1. Varianten von NF^2
+1. Varianten von NF2

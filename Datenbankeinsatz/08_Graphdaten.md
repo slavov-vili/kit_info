@@ -112,8 +112,109 @@
         * ![image](images/pagerank_intuition.png)
     - Beispiel
         * ![image](images/example_pagerank.png)
-1. Proximity Prestige
-    - Ii = Influence Domain = Menge an knoten von denen aus (from which) i erreichbar ist
+1. Proximity Prestige (PP)
+    - Definition
+        * ![image](images/proximity_prestige_formula.png)
+        * Zähler = Anteil der Knoten, von denen aus i erreichbar ist
+    - Ii = Influence Domain = Menge der Knoten von denen aus (from which) i erreichbar ist
     - d(j,i) = kürzester Pfad j -> i
         * Durchschnitt = sum(d(j,i), j in Ii) / |Ii|
-1. TODO: continue
+    - Verständnis
+        * PP = normalisierte Größe des Influence Domains
+        * PP = durchschnittliche Länge kürzester Pfad
+        * Große Influence Domain = großer PP-Wert
+        * Große durchschnittliche länger kürzester Pfad = kleiner PP-Wert
+    - Maximaler PP-Wert
+        * Wenn i von alle Knoten erreichbar ist (Zähler ist maximal)
+        * Wenn die Länge kürzester Pfad von allen Knoten = 1
+    - Kleinster PP-Wert
+        * Kleine Influence Domain
+        * Sehr große Länge kürzester Pfad
+1. Betweenness Centrality
+    - Ausgangslage
+        * Zwei nichtbenachtbarte Knoten j und k wollen miteinander interagieren
+        * i ist auf dem Pfad zwischen beiden (hat etwas Kontrolle über die interaktion)
+        * i ist wichtig, wenn auf viele solche Pfade liegt
+        * Pjk = Anzahl kürzester Pfade zwischen j und k
+    - Definition
+        * ![image](images/betweenness_centrality_formula.png)
+    - Andere Art von Zentralität
+        * Proximity = Erreichbarkeit von anderen Knoten
+        * Betweenness = wie häufig kann man Einfluss ausüben
+    - Beispiel: One-centered star vs Clique (every 2 vertices are neighbors)
+        * PP(N) in beide Fälle maximal (zusätzliche Knoten in der Clique machen kein Unterschied)
+        * Betweenness(N) ist maximal bei Star, aber sehr klein bei Clique
+1. Informationsbedürfnisse
+    - Normalerweise in der WHERE Klause
+    - Oft in Kombination mit andere Berechnungen (z.B. Frauen mit Zentralität > x)
+    - Beispiele
+        * Wer hat den höchsten PageRank?
+        * Was ist der durchschnittlich kürzester Pfad zwischen Individuen mit höher Zentralität?
+        * Welche Personen haben hohe Proximity, aber klein Betweenness (vernetzt, aber kleinen Einfluss)?
+    - Zentralitätsberechnung soll Primitiv der Anfragesprache sein (sonst muss man von Hand berechnen)
+1. Transformationen
+    - Die meisten Maßen erfordern Transformationen der Graphen
+    - Gewichtete Mehrfachgraphen -> einfache gewichtete Graphen -> einfache ungerichtete Kanten
+    - Beachten: Transformation führt zu Informationsverlust
+    - EigenTrust Transformation
+        * ![image](images/transformation_eigentrust.png)
+    - Beta Transformation
+        * ![image](images/transformation_beta.png)
+    - Informationsbedürfnisse
+        * Graph, für dessen Knoten Zentralitätsmaß berechnet wird, muss aus existierendem Graph abgeleitet werden.
+        * Sicht spezifiziert diese Transformation. Verwendung einer Anfragesprache, um diese Sicht zu spezifizieren.
+        * Die Transformationen oben sind in SQL darstellbar.
+
+
+
+# Query Algebra für Vertrauen
+1. Rahmenwerk (Framework) für verhaltensbasierte Modellierung von Vertrauen
+    - Aspekte
+        * Relationale Repräsentation von verhaltensbasiertem Wissen
+        * Algebra für die Formulierung von verhaltensbasierten Trust Policies
+    - Vorteile
+        * Unterstützt die Definition beliebiger benutzerdefinierter verhaltensbasierter Trust Policies
+        * Relationale Repräsentation ermöglicht eine wenig aufwändige Implementierung
+1. Relationale Repräsentation des Wissens
+    - Relationen, die verhaltensspezifisches Wissen repräsentieren:
+        * Feedback, Recommendation, Reputation, Trust
+        * Weitere Relation: Entity(ID)
+    - Beispiel + Ziel
+        * ![image](images/beispiel_relationale_represaentation.png)
+1. Algebraische Darstellung der Policies
+    - Trust Policy = Anfrage bezogen auf den Datenbestand
+    - Übliche Art mit Relationen zu arbeiten (Relationale Algebra)
+        * Menge von Operationen, die auf Relationen anwendbar sind
+        * Abgeschlossenheit => Kombination der Operatoren = komplexe Algebraausdrücke
+    - Relationale Algebra = Kern der Sprache für Trust Policies
+        * Operatoren reichen nicht aus => Erweiterung ist erforderlich
+    - Neue Operatoren
+        * TOP\[k, attr\](Relation)
+            + ![image](images/operator_top.png)
+            + Gibt die k Tupel mit dem höchsten Wert des Attributs attr zurück
+        * MAP\[attr, expression(A1,...,An)\](Relation)
+            + ![image](images/operator_map.png)
+            + Ermöglicht die Ausführung benutzerdefinierter Funktionen auf den Attributen einer Relation.
+            + Die Funkionen werden separat auf jedem Tupel ausgewertet; die Ergebnisse werden zu einem neuen Attribut.
+        * CENTRALITY\[attr, Av, As, At, Aw, Measure\](Rvertices, Redges)
+            + ![image](images/operator_centrality.png)
+            + attr = new attribute
+            + Av = vertex, As = source, At = target Aw = weight
+1. Trust Policies: Beispiel
+    - Formulierung:
+        * Ich vertraue Individuen in Kontext c und bezüglich Aspekt fc, wenn das durchschnittliche Feedback über sie von den zehn angesehensten Entitäten einen gewissen Schwellwert übersteigt.
+        * Nur Feedback mit hoher Verlässlichkeit (Certainty > 0.8) soll berücksichtigt werden.
+    - Algebraausdruck
+    ```
+        PROJECTION[trusted] (
+            MAP[trusted, avg_value > threshold] (
+                GROUP[avg_value, AVG(Feedback.value), {ratee}] (
+                    JOIN[Feedback.rater = Reputation.entity] (
+                        TOP[10, Reputation.value] ( SELECTION[context=c, facet=fc](Reputation) ),
+                        SELECTION[ratee=id, context=c, facet=fc, certainty>0.8](Feedback)
+                    )
+                )
+            )
+        );
+
+    ```
