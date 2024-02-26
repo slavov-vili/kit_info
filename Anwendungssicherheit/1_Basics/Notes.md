@@ -1,9 +1,10 @@
 # x86 Assembler Programming
 1. General Purpose Registers
     - 32-bit:
-    - ![image](images/registers_32bit.png)
+        * ![image](images/registers_32bit.png)
     - 64-bit:
-    - ![image](images/registers_64bit.png)
+        * ![image](images/registers_64bit.png)
+        * 8 bytes
 1. Instructions
     - **Intel**/AT&T Syntax = Left/Right is the target
     - Basics:
