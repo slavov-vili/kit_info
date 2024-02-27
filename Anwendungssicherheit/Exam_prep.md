@@ -32,15 +32,13 @@
 1. Buffer overflows
     - arrays grow in reverse direction of stack (allows overwriting stack)
     - Can overwrite variables and return address
-    - **gets** just writes as much as it reads
-    - **puts** writes until the first null character
-    - **strcpy** = copies everything
+    - **gets** = reads until newline or EOF and writes
+    - **puts** = writes until the first null character
+    - **strcpy** = copies until null byte
+    - Mitigation: canaries
 1. Stack
     - Grows from high to low addresses
     - Random address at start (execve), preserved through fork
-1. Shellcode injection
-    - Write custom code to memory and overwrite return address to point to it
-    - Attacker requires leak to find buffer address
 1. Stack canaries
     - What?
         * Random int, chosen at program start (execve), preserved through fork
@@ -53,15 +51,13 @@
         * Brute force whole value (32bit = 2^24 tries, 64bit = impractical)
         * Brute force individual bytes (overwrite 1 by 1 and try, requires fork server)
         * Information leak
-1. Race conditions
-    - Multiple threads try to access the same resource
-    - Avoiding requires locks or atomic operations
-    - TOCTOU (Time of Check, Time of Use) errors
-        * Attacker can mess with stuff between check and use
-        * Look out for privilege boundaries
-        * Also possible in single thread (side effects change variables)
+1. Shellcode injection
+    - Write custom code to memory and overwrite return address to point to it
+    - If no measures: static memory through analysis
+    - If ASLR: Attacker requires leak to find buffer address
+    - Mitigation: NX bit
 1. NX (Non-eXecutable) Bit
-    - Status big for memory pages
+    - Status bit for memory pages
     - CPU throws an exception
     - On by default (injected shellcode cannot be executed)
     - Bypassing
@@ -80,6 +76,7 @@
         * Must know victim's libc (not trivial, but possible)
         * Find gadgets with tools (e.g. ROPgadget)
         * ROP chain = sequence of addresses of gadgets and functions and parameters
+    - Mitigation: ASLR
 1. ASLR (Address Space Layout Randomization)
     - Randomizes loading addresses of libraries (including libc)
     - Prevents ret2libc and ROP
@@ -92,6 +89,13 @@
             + stack = main called from libc
             + Global Offset Table
             + Sometimes heap = dynamic memory management sometimes points to libc data segment
+1. Race conditions
+    - Multiple threads try to access the same resource
+    - Avoiding requires locks or atomic operations
+    - TOCTOU (Time of Check, Time of Use) errors
+        * Attacker can mess with stuff between check and use
+        * Look out for privilege boundaries
+        * Also possible in single thread (side effects change variables)
 1. Integer Bugs
     - Unsigned = [0000 - 1111]
     - Signed = [1000 - 0111]
@@ -115,7 +119,7 @@
     - Attack: overwrite GOT entry to point to custom code
     - Defense: disable lazy binding (full RELRO, slower)
         * RELRO = RElocation Read Only
-        * Partial = GOT read-only after init, PLT still writable
+        * Partial = only parts which don't depend on PLT are read-only
         * Full = both are read-only
 1. PIEs (Position Independent Executables)
     - Like ASLR, but for program base address
@@ -170,3 +174,11 @@
         * Simulate library functions using python code
         * Reduces amount of assembler code needed to be analyzed
         * 
+    - Program structure
+        * Project = contains info about the binary
+        * Initial state = State before execution (registers, memory, symbolic values)
+        * Simulation manager = Manages paths simultaneously, keeps track of states
+        * Explore function = Tells the program how to explore and follow paths (DFS, BFS, etc.)
+        * Find criterion = tells the program what it's looking for
+        * Simulation manager stashes = container for states
+            + Found = all states which satisfy a criterion
