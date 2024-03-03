@@ -222,11 +222,47 @@
             + RETURN [x IN range(0,10) WHERE x % 2 = 0 | x^3 ] as result = [0, 8, 64, 216, 512, 1000]
 1. Anfrageausführung
     - Einleitung
-        * TODO: explain
+        * Anfrage -> Anordnung physischer Operatoren
+        * Generierung des Queryplans
+            + Zwischenschritt der Anfrageauswertung
+            + Enthält Schätzung zu Größen der Zwischenergebnisse
+        * In Neo4J: eine Unterscheidung zwischen logischer und physischer Ebene
+    - Arbeitsweise des Anfrageoptimierers
+        * ![image](images/beispiel_anfrageoptimierer.png)
+        * EXPLAIN = Erläuterung
+            + TODO: see plan\_explain\_kl.png
+1. Physische Operatoren
+    - Wirkliche Operationen auf Daten während Query Ausführung
+    - Expand all
+        * Navigation ausgehend von gegebenem Knoten gemäß spezifischer Kante
+        * Im Beispiel: mj = Ausgangsknoten, anon\_8 = Kante, anon\_7 = Knoten
+        * Kann auf Kanten mit bestimmten Label einschränken: (p) -> [anon\_0: FRIENDS_WITH] -> (fof)
+        * Expand into = findet alle Kanten zwischen 2 Knoten
+    - SemiApply
+        * Für Selektionsbedingungen: ist Muster X vorhanden?
+        * Param 1/Links = select, Param 2/Rechts = where
+        * Apply = gibt sowohl links als auch rechts aus
+        * AntiSemiApply = ! Param 2
+    - EagerAggregation
+        * Aggregatberechnung (pro Gruppe)
+    - ProduceResults
+        * Abschließender Operator in jeden Plan
+    - CacheProperties
+        * Caching von bestimmten Werten
+        * Insbesondere sinnvoll, wenn die Werte nach Join-Berechnung mehrmals vorkommen
+        * Zugriff auf Werte im Cache: cache[...]
+1. Limitierung des Anfrageoptimierers
+    - Basics
+        * Nur rudimentärer Schätzer
+        * TODO: what else?
 
 
 
 # Graphs-at-a-Time
+1. Übersicht
+    - ![image](images/beispiel_graphmuster.png)
+    - Graphmuster specifiziert
+    - Flexible Spezifikation des Graphmusters mit Hilfe einer formalen Sprache
 1. Graph Motifs
     - Grammatiken:
         * S1 = S2 *
@@ -236,16 +272,44 @@
         * Kanten, Knoten = Terminalsymbole
         * Graph = Nichtterminalsymbol
 1. Zusammensetzung von Graphen
-    - TODO: images
-    - Konkatenation
-    - Unifikation
+    - Konkatenation mit Kanten
+        * ![image](images/graph_konkatenation_kanten.png)
+    - Konkatenation durch Unifikation
+        * ![image](images/graph_konkatenation_unifikation.png)
     - Disjunktion
+        * ![image](images/graph_disjunktion.png)
+        * Blauer Teil = Externe Interface
+        * Beim einbauen in größeren Motif: nur externer Interface sichtbar
     - Rekursion
+        * ![image](images/graph_rekursion.png)
+        * External Interface = fn und ln
+        * Beispiel: Zyklus
+            + ![image](images/graph_cycle.png)
+        * Beispiel: Binärbaum
+            + ![image](images/graph_bintree.png)
 1. Diskussion
     - Begrenzte Ausdrucksmächtigkeit der Motifs
-    - Beispiele
-        * TODO: explain
+        * TODO: explain?
         * Binomialbaum
         * Cliquen
 1. Graph Algebra
-    - 
+    - Selektion = nur Graphen mit bestimmten Eigenschaften zeigen
+    - Projektion = nur bestimmte Knoten/Kanten anzeigen
+    - Karthesisches Produkt = Menge von Graphen mit jeweils zwei Komponenten, eine aus G1 und eine aus G2
+    - Storage queries
+        * ![image](images/graph_storage_query.png)
+        * beschreiben Abbildung von semistrukturierten Daten aufs Relation
+        * OID bei inneren Knoten, Textinhalt bei Blättern
+    - Komposition
+        * ![image](images/graph_komposition.png)
+        * Rumpf des Templates = was passiert bei der Instaziierung des Musters
+        * v1,v2 in Template = Variablen des Musters
+        * TODO: wtf does this mean?
+    - Graphalgebra ohne Rekursion = Relationale Algebra
+        * Tupel = Graph aus einem Knoten mit Attributen X
+        * Alle Operatoren problemlos darstellbar
+            + Selektion, Projektion, kartesisches Produkt, Vereinigung, Differenz
+    - Graphen => Datalog
+        * ![image](images/graph_to_datalog.png)
+            + Graph = Fakten
+            + Graphmuster = Datalog-Regeln
