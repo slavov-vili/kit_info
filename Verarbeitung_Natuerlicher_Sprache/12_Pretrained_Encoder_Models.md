@@ -48,10 +48,10 @@
 
 # Transfer Learning / Pre-training
 1. Idea
-    - TODO: image
+    - ![image](images/traditional_vs_transfer_learning.png)
     - Train model on unlabeled data
     - Reuse model for a related task
-    - Example: word vectors
+    - Example: Use word vectors in NER, SLU, ...
 1. Challenges
     - What is a useful source task?
         * Should be similar to target task
@@ -64,26 +64,32 @@
         * Should have lots of data (unsupervised learning)
 1. Self-Supervised Learning
     - Idea: Create supervised learning task from unlabeled data
+    - General Approaches: Compression, prediction (missing, properties, relation)
     - Neural Approaches: Similar to next word prediction
-        * Efficient training
-    - Variants
+        * Efficient training (several feedbacks per example)
         * Use an RNN instead of n-gram models
-            + TODO: image + shifted sentence
+            + ![image](images/unsupervised_sequence_labeling_rnn.png)
+            + Sentence is shifted by one
         * Full text available from start => use bidirectional models
         * Use Self-Attention
             + Bidirectional per default
             + Can be made unidirectional using masks for future words (same parameters)
             + Can train 1/2 bi and 1/2 uni and then can use for both tasks
     - Masked Language Model Task
-        * TODO: image + no longer shifted
+        * ![image](images/unsupervised_sequence_labeling_masking.png)
+            + Sentence is no longer shifted
         * Idea: Automatically create supervised learning task
         * Bidirectional
         * Mask out some words and predict
         * Problem: No direct feedback for each input
 1. Transferring knowledge
-    - Word embedding - same representation for each word
-    - Contextual word embedding (text encoder) - different representations
-        * Everything except classification head
+    - What do we share between tasks?
+        * ![image](images/transfer_learning_shared_knowledge.png)
+        * From Word embedding layer
+            + Use same representation for each word
+        * From Contextual word embedding layer (text encoder)
+            + Use different representations
+            + Share everything except classification head
 
 
 
@@ -91,13 +97,49 @@
 1. Static Word Embeddings: Word2Vec, FastText, Glove
 1. Contextual Word Embeddings: Bidirectional, EIMO, BERT
 1. EIMO
-    - TODO: explain
+    - ![image](images/model_eimo.png)
+    - RNN-based model
+    - Trained using next word prediction
+    - Embedding = weighted sum of two 2-layer RNNs
+    - Can we use bidirectional models in pre-training?
+        * Idea: Masking
 1. BERT
+    - ![image](images/model_bert.png)
     - Properties
         * Bidirectional Masking model
         * Self-attention framework
         * Next sentence prediction
         * Input using several sentences
-    - TODO: explain representation and tokens
-        * CLS token used instead of aggregation layer to get info of sentence
-
+    - Input representation
+        * Subword units
+        * First token
+            + CLS used instead of aggregation layer to get info of sentence
+            + SEP = sentence separator
+            + A/B = embeddings for different sentences
+    - Mask Language Model
+        * Mask 15% of the subword teoksn
+            + 80% = MASK token
+            + 10% = random token
+            + 10% = unchanged
+    - Next Sentence Prediction
+        * Predict whether 2 sentences are consecutive
+        * Based on CLS embedding
+1. Bidirectional models
+    - ![image](images/bidirectional_pretraining.png)
+    - Processing
+        * Input must be available
+        * Non-autoregressive
+    - Loss = Masking
+    - Examples: BERT, Roberta, Albert
+1. Application of Pre-trained models
+    - Fine-tune a model on a target task
+    - Only top layer vs all layers
+1. ACE
+    - Different pre-trained models have strengths and weaknesses
+    - Idea: combine them by concatenating embeddings
+    - Which do we choose?
+        * Learn a model to tell us
+1. Pre-trained word embeddings
+    - ![image](images/pretrained_word_embeddings.png)
+    - Static = same representation for each instance of a word
+    - Using word prediction: weighted sum of context words
