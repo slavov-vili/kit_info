@@ -82,37 +82,65 @@
             + A lot more parameters (learn for each layer)
         * Tuning initialization = initialize with discrete prompts
 1. Architecture Adaptation
-    - How do we change the network's architecture?
+    - ![image](images/architecture_adaptation.png)
     - Motivation
-        * TODO: explain
-    - Remove preretraining task head
-        * TODO: explain
-    - Add target task-specific layers
+        * Adapting to structurally different task
+            + Pre-train with simple input (language modeling)
+            + Adapt to a task with several inputs  (translation, conditional generation)
+            + Use pre-trained weights to initialize as much as possible
+        * Task-specific modifications
+            + Improve pre-trained model to deal with new target task
+            + Example: add skip/residual connections or attention
+        * Using less parameters
+            + Less parameters to fine-tune
+            + Example: add bottleneck modules (adapters) between layers
+    - How do we change the network's architecture?
+    - Remove the head (last layer) of the pre-trained model
+        * if it's not useful to the target task
+        * Example: remove softmax from pre-trained LM
+    - Add target task-specific layers (at top/bottom)
         * Simple: Add linear layer on top of pre-trained model
         * Complex: Add multiple layers (output of pre-trained is input to another model)
     - Adapters
-        * TODO: explain
-        * Benefit: Increased robustness and sample efficiency
+        * ![image](images/adapters.png)
+        * Features
+            + Usually connected with a residual connection in parallel (blue squares)
+            + Most effective when at every layer
+            + Different operations possible (convolutions, self-attention)
+            + Very suitable for modular architectures like Transformers
+        * Basic idea
+            + Input & Output = hidden representations
+            + Calculation = sigma(W \* h)
+            + Problem: W is very high dimensional
+        * Up-Down Projection
+            + ![image](images/up_down_projection.png)
+            + down = sigma(Wd \* h)
+            + up = sigma(Wu \* down)
+            + Way less parameters
+            + Some problem => add residual connection
+        * Benefits: Increased robustness and sample efficiency
         * Useful when representations are different
             + Just plugging = representations are different (length, scope: sentence, subword, etc.)
             + An adapter learns a mapping between them
-            + CTC Compression (TODO: explain)
+            + CTC Compression (average representations with same index and remove redundant/uninformative vectors)
             + Fine-tune text encoder OR Use an additional LSTM model
     - Weight factorization
+        * Replace weights by general matrix and task-specific ones
         * Use weights to directly change the parameters (instead of using adapters for hidden representation)
             + No additional layers, but directly on weights
-        * TODO: explain
+        * Parameter-efficient representation of task-specific matrix
 1. Optimization Schemes
     - Which weights to train during adaptation and following what schedule?
     - What to train?
-        * Feature Extraction
+        * When doing Feature Extraction
             + Weights are frozen
             + Train a linear classifier on top of the pre-trained model
-            + TODO: explain
-        * Adapters
+            + Simple: learn top layer
+            + Advanced: learn a linear combination of layers
+        * When using Adapters
             + = task-specific modules between existing layers
             + Only train the adapters
-        * Fine-tuning
+        * During Fine-tuning
             + Initialize with pre-trained model
             + Train whole model
     - How to train?
@@ -129,7 +157,8 @@
     - How do we get more supervision signals for the model
     - More signals
         * TODO: explain
+1. Standard Cross-Language Transfer
+    - Train multilingual model
+    - Fine-tune on a task in the high-resource (source) language
+    - Transfer and evaluate on low-resource (target) language
 
-
-
-# Standard Cross-Language Transfer
