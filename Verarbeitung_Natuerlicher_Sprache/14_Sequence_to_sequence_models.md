@@ -69,7 +69,7 @@
         * Label = next word
         * Motivation: generate output one token at a time
     - Sequence-to-Sequence
-        * ![image](images/autoregressive_seq_to_seq.png)
+        * ![image](images/autoregressive_model.png)
         * Language Model
             + P(W) = probability of word sequence
             + P(Wn|W1,...,Wn-1) = probability of next word, given previous ones

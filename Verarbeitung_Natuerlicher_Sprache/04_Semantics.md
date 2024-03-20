@@ -17,9 +17,9 @@
     - Antonym = words with opposing meaning (long/short)
         * Differ in one aspect
         * Mostly adjectives
-    - Taxomaic Relations
+    - Taxonomic Relations
         * Hyponym = words which are more specific (car -> vehicle)
-        * HYpernym = less specific (vehicle -> car)
+        * Hypernym = less specific (vehicle -> car)
         * Meronym = part-whole relation (wheel -> car)
     - The basic level is human-sized (things we know how to interact with)
 1. Word similarity = score of how similar words are

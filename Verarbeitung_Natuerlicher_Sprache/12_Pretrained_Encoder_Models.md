@@ -117,7 +117,7 @@
             + SEP = sentence separator
             + A/B = embeddings for different sentences
     - Mask Language Model
-        * Mask 15% of the subword teoksn
+        * Mask 15% of the subword tokens
             + 80% = MASK token
             + 10% = random token
             + 10% = unchanged

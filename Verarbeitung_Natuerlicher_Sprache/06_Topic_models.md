@@ -10,7 +10,7 @@
     - Example: find most frequent words
 1. Topics
     - Described by frequent words (distribution of words)
-    - Rare words are more important, stock?stop? words are less relevant
+    - Rare words are more important, stopwords are less relevant
 1. Topic extraction
     - Input: corpus; number of topics
     - Output: Topics; Document -> Topics mapping
@@ -18,7 +18,7 @@
 1. Approach 1
     - Dataset = collection of documents
     - Represent documents using |V|-dimensional vector
-        * Example: TD-IDF
+        * Example: TF-IDF
     - Document set = Matrix M x |V|
         * M = 
 1. Matrix factorization

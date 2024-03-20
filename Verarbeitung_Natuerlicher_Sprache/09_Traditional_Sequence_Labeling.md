@@ -15,6 +15,7 @@
     - Example: Named Entity Recognition
     - Roughly: foreach input item -> predict a label
 1. POS Tagging
+    - ![image](images/pos_tags.png)
     - Basics
         * Grammatical tagging
         * Word-category disambiguation
@@ -45,7 +46,7 @@
     - Markov assumption: the next state only depends on the current one
     - Independence of output: the output only depends on the current state
 1. Markov Chains
-    - ![image](images/markov_chains.png)
+    - ![image](images/markov_chain.png)
     - Definitions
         * Set of states
         * Connections between states (weight = transition probability)
@@ -83,3 +84,16 @@
 # Linear Chain Conditional Random Field (CRF)
 1. Discriminative Models
     -  Model P(y|x)
+1. Sequence Modeling
+    - Model sequences of observations or labels
+1. CRFs
+    - Model join probability distribution over a set of random variables
+    - Specifically: probability of label sequence given input one
+1. Linear Chain Structure
+    - Assumption that current label only depends on the observation and the previous label
+1. Features
+    - Used to find dependencies (functions which take the cur observation, cur and prev labels)
+1. Parameter Estimation
+    - Learned using maximum likelihood estimation
+    - Adjusted during training
+

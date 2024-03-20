@@ -136,6 +136,7 @@
         * Solution:
             + only use the last x words from the sentence to calculate the history
     - Markov Assumption
+        * Basically: we approximate each element
         * Simplification: P(the|water is so transparent that) ~= P(the|transparent that)
         * P(w1,...,wn) = multiply P(wi|wi-(x-1),...,wi-1), i in [1,n]
     - Approaches

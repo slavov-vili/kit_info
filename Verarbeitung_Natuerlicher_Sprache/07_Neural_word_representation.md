@@ -8,7 +8,7 @@
     - Perceptrons
         * ![image](images/perceptron.png)
         * Activation function lets us represent a series of sums as just one
-        * Need fixed-size inputs, because other we don't know what weights to use
+        * Need fixed-size inputs, because otherwise we don't know what weights to use
     - Multi-layer perceptron
         * ![image](images/mlp_error_function.png)
         * Layers of perceptrons
