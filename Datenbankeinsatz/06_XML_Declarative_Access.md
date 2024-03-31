@@ -134,7 +134,7 @@
         * Beachten: refer bezieht sich auf das name-Attribut, NICHT auf das Schlüsselfeld
             + Werte in references sind immer unter den Schlüsseln zu den Papieren zu finden
 1. Absolute und Relative Lokatorterme
-    - ![image](images/xpath_locator_terms.png)]
+    - ![image](images/xpath_locator_terms.png)
 
 
 
