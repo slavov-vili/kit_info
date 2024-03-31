@@ -289,7 +289,7 @@
         * ![image](images/xquery_beispiel12_advanced.png)
 1. Beispiel 13
     - Query: Finde den Gatten von Magda
-    - ![image](images/.png)
+    - ![image](images/xquery_beispiel13.png)
     - Notizen
         * shallow = gibt Knoten ohne Kinder zurück
         * Queries über ID-/IDREF-Struktur

@@ -77,7 +77,7 @@
         * (a|b|c) = Alternativen
         * Kardinalitäten
             + \* = 0+
-            + + = 1+
+            + \+ = 1+
             + ? = 0|1
             + (keine Angabe) = 1
         * EMPTY = muss leer sein

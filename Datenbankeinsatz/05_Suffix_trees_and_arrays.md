@@ -9,7 +9,7 @@
         * (strukturelle) Attribute: x-Wert links, y-Wert unten
         * Funktionen: fläche(), intersect()
     - Benötigte Erweiterungen
-        * Möglichkeit Datentypen und Methodn zu hinterlegen
+        * Möglichkeit Datentypen und Methoden zu hinterlegen
         * Parser muss damit umgehen können
         * Umgebung zur Ausführung des Codes
             + z.B. fläche(): als stored procedure oder in gängiger Programmiersprache
@@ -127,13 +127,13 @@
             + a = (eventuell leerer) String
             + u = Knoten mit Pfadbeschriftung a
             + SL(v) = u = Suffixverweis = Zeiger von v nach u
-            + aka suffix Node with path-label = last n-1 Chars of v???
+            + aka suffix Node with path-label = last n-1 Chars of v
         * Eigenschaften
             + Jedes suff\_i im Teilbaum unter v hat das Präfix ca
             + Jedes suff\_i+1 mit dem Präfix a ist im Teilbaum unter u vertreten
             + Jeder innere Knoten (außer der Wurzel) hat einen Suffixverweis
             + Der Teilbaum unter v ist komplett im Teilbaum unter u enthalten
-            + SL(v) = u => tree-depth(u) >= ree-depth(v)-1
+            + SL(v) = u => tree-depth(u) >= tree-depth(v)-1
     - Generalisierter Suffixbaum
         * ![image](images/beispiel_generalisierter_suffixbaum.png)
         * S = Menge von Strings = {s1,s2,...,s\_k}
