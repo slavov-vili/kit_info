@@ -143,7 +143,7 @@
         * ![image](images/beispiel_dataguide.png)
     - DataGuide d einer DB s ist selber eine DB, so dass
         * jeder label path in s genau eine data path-Instanz in d hat
-        * jeder labe path von d ein label path von s ist
+        * jeder label path von d ein label path von s ist
     - DataGuide erlaubt offensichtlich nachzusehen, welche Pfade in der DB vorkommen
     - Eigenschaften
         * Kurz: jeder label path wird genau einmal beschrieben
@@ -250,7 +250,7 @@
             + Gleiches Prinzip wie oben, nur mehrere Tupel inspizieren
 1. Verallgemeinerung für Text und semistrukturierte Daten
     - Beispiel für n-grams: 'character' = 'chara', 'harac', 'aract'
-        * Indexeintrag mit 'chara' wird erzeugtl, wenn deutlich seltener als 'char', 'hara', usw.
+        * Indexeintrag mit 'chara' wird erzeugt, wenn deutlich seltener als 'char', 'hara', usw.
     - Gleiches Vorgehen möglich für Pfade (im XML-Dokument)
         * Indexierung: Pfadfragment - Dokumenttext
 

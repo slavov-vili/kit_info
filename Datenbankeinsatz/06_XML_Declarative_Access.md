@@ -63,10 +63,10 @@
         * buch/@* = Alle Attribute des Buchs (Name + Wert)
         * preis/@währung = Alle Währungen von Preisen
         * buch[zusammenfassung] = Alle Bücher, die eine Zusammenfassung enthalten
-        * buch[zusammenfassung]/tiel = Titel aller Bücher, die eine Zusammenfassung enthalten
+        * buch[zusammenfassung]/titel = Titel aller Bücher, die eine Zusammenfassung enthalten
         * author[vorname="Hans"] = author[string(vorname)="Hans"] = Alle Authoren mit Vornamen Hans
             + vorname liefert Liste von Vornamen und Vergleicht elementweise mit Hans
-        * author[(titel $or$ auszeichnung)] = Alle Authoren mit Titel oder Auszeichnung
+        * author[(titel \$or\$ auszeichnung)] = Alle Authoren mit Titel oder Auszeichnung
             + $ und () kann man weg lassen
     - Namensräume
         * mein\_namensraum:\* = Alle Elemente in mein\_namensraum
@@ -185,7 +185,7 @@
         * Beispiel: "Obama Nixon Kennedy" wird zu [ "Obama", "Nixon", "Kennedy" ]
     - Wertvergleiche (value comparison)
         * eq = Operator zum Vergleich von Werten (manchmal auch =)
-        * Liefert wahr, wenn Wert gleich Ergebnis dr Atomisierung ist
+        * Liefert wahr, wenn Wert gleich Ergebnis der Atomisierung ist
         * Beispiele
             + $book1/author eq "Kennedy"
             + [ "Kennedy" ] eq "Kennedy"
@@ -230,7 +230,7 @@
             + stable order by = Dokumentreihenfolge bleibt erhalten bei gleichem Sortierschlüssel
 1. Beispiel 6
     - ![image](images/xquery_beispiel6.png)
-1. Konvertierung: Attribu <-> Element
+1. Konvertierung: Attribut <-> Element
     - Attribut -> Element: \<year\> { string($b/@year) } \</year\>
     - Element -> Attribut: \<book year="{ string($b/year) }"\>
 1. Beispiel 7
