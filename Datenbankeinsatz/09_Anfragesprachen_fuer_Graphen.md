@@ -78,9 +78,9 @@
             RETURN n.time AS time, COUNT(n) AS count
         ```
         * Ausgabe
-            + ![image](images/result_graph_query1.png)
+            + ![image](images/output_graph_query1.png)
         * Erläuterungen
-            + Erste Zeile = Zeilennummer (Systemgeneriert)
+            + Erste Spalte = Zeilennummer (Systemgeneriert)
             + Nur Knoten mit Label 'Loop'
             + Kompakt, da keine WHERE Klause (alternativ: MATCH (n) WHERE 'Loop' in labels(n))
             + Implizite Gruppierung (explizite Attribute = Gruppierungsschlüssel)
@@ -99,7 +99,7 @@
             + count() = Anzahl der Werte/Knoten (siehe Beispiel 1)
     - Beispiel 3: Komplexe Bedingungen bezogen auf Graphstruktur
         * Finde alle Junction-Knoten, die mit einem Loop-Knoten mit ID = 1 verbunden sind, gruppiert nach Zeitpunkten.
-            + verbunden = ex gibt ein Elementar-knoten dazwischen (keine direkte Kante)
+            + verbunden = es gibt ein Elementar-knoten dazwischen (keine direkte Kante)
         ```
             MATCH (n:Loop {id:1})-[*2]-(m:Junction)
             WITH n, collect(distinct m.id) as ids
@@ -148,7 +148,7 @@
             + Alle Knoten in der Instaziierung des Pfads sind unterschiedlich
             + d.h. Graph-Knoten darf in Muster nur einmal vorkommen (l.id <> k.id ist redundant)
             + Die Abfragen sind gleichbedeutend, der Anfragenoptimierer erkennt das aber nicht
-            + Länge Pfaden erzeugen riesige Zwischenergebnisse bei dichte Graphen
+            + Lange Pfaden erzeugen riesige Zwischenergebnisse bei dichte Graphen
     - Spezifikation komplexer Muster
         * ![image](images/komplexe_graphenmuster.png) 
 1. Weitere Sprachmerkmale
@@ -173,7 +173,7 @@
             ```
     - Zugriff auf Kantenlabels und -attributwerte
         ```
-            MATCH (wallstreet {title: 'Wall Street'}) <- [r:ACTED_IN] - (actor)
+            MATCH (wallstreet {title: 'Wall Street'}) <-- [r:ACTED_IN] -- (actor)
             RETURN r.role
         ```
         * Erläuterungen
@@ -284,7 +284,7 @@
         * ![image](images/graph_rekursion.png)
         * External Interface = fn und ln
         * Beispiel: Zyklus
-            + ![image](images/graph_cycle.png)
+            + ![image](images/graph_zyklus.png)
         * Beispiel: Binärbaum
             + ![image](images/graph_bintree.png)
 1. Diskussion

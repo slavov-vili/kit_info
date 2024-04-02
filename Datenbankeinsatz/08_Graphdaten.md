@@ -9,7 +9,7 @@
         * 1x Relation für Knoten und 1x für Kanten
         * Knoten können beliebige Attribute haben (inklusive Kanten)
         * ODER: mehrere Relationen je nach Knoten- und Kantentypen
-        * Sowohl für gerichtet als auch für ungerichtete Graphen möglich
+        * Sowohl für gerichtete als auch für ungerichtete Graphen möglich
     - Fragen
         * Können wir alles mit SQL ausdrücken? (oder mit Variante mit Rekursion)
         * Ist die Anfrageauswertung effizient?
@@ -61,7 +61,7 @@
         * Repräsentation des Wissens in Form eines gerichteten Graphen
             + ![image](images/wissen_als_graph.png)
     - Typen von Verhaltensspezifischen Wissen
-        * Feedback = Bewertung einer Interaktion mit einem Partner (ratee) durch einen Bewerdenden (rater)
+        * Feedback = Bewertung einer Interaktion mit einem Partner (ratee) durch einen Bewertenden (rater)
         * Empfehlung = Meinung einer Entität (recommender) über das Verhalten eines Partners (recomendee) in der Vergangenheit.
         * Reputation = Meinung des Netzwerkes gesamthaft über eine bestimmte Entität, (globale Eigenschaft)
         * Vertrauten = Überzeugung einer Entität (truster), dass ein Partner (trustee) sich wie erwartet verhalten wird.
@@ -149,7 +149,7 @@
     - Oft in Kombination mit andere Berechnungen (z.B. Frauen mit Zentralität > x)
     - Beispiele
         * Wer hat den höchsten PageRank?
-        * Was ist der durchschnittlich kürzester Pfad zwischen Individuen mit höher Zentralität?
+        * Was ist der durchschnittlich kürzeste Pfad zwischen Individuen mit höher Zentralität?
         * Welche Personen haben hohe Proximity, aber klein Betweenness (vernetzt, aber kleinen Einfluss)?
     - Zentralitätsberechnung soll Primitiv der Anfragesprache sein (sonst muss man von Hand berechnen)
 1. Transformationen
@@ -180,7 +180,7 @@
         * Feedback, Recommendation, Reputation, Trust
         * Weitere Relation: Entity(ID)
     - Beispiel + Ziel
-        * ![image](images/beispiel_relationale_represaentation.png)
+        * ![image](images/beispiel_relationale_repraesentation.png)
 1. Algebraische Darstellung der Policies
     - Trust Policy = Anfrage bezogen auf den Datenbestand
     - Übliche Art mit Relationen zu arbeiten (Relationale Algebra)
